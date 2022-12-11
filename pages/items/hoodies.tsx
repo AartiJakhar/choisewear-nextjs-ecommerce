@@ -6,7 +6,7 @@ export default function hoodies() {
     <div className="container px-5 py-24 mx-auto">
       <div className="flex flex-wrap justify-around -m-4">
         <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4  ">
-          <Link href={"/product/the-catalyzer"}  className="block relative h-48 rounded overflow-hidden">
+          <Link href={"/product/the-Hoodies"}  className="block relative h-48 rounded overflow-hidden">
             <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://m.media-amazon.com/images/I/41ERXILtLVL.jpg"/>
           </Link>
           <div className="mt-4">

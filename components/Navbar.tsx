@@ -1,10 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useRef } from 'react'
+import React, { useRef ,useEffect} from 'react'
 import { AiOutlineShoppingCart, AiFillCloseCircle, AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 import {BsFillBagCheckFill} from "react-icons/bs"
-export default function Navbar() {
+export default function Navbar({addToCart,cart,removeFromCart,}:any) {
   const ref: any = useRef()
+  useEffect(() => {
+    // addToCart()
+    if(cart.length!==0){
+      console.log(Object.keys(cart))
+
+    }
+  }, [cart])
+  
   const toggleCart = () => {
     if (ref.current.classList.contains('translate-x-full')) {
       ref.current.classList.remove('translate-x-full')
@@ -37,50 +45,24 @@ export default function Navbar() {
         <h2 className='font-bold text-xl  text-center'>Shoping Cart</h2>
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl  "><AiFillCloseCircle /></span>
         <ol className='list-decimal font-semibold'>
-          <li >
+         { Object.keys(cart).length===0 && <div>no items in the cart</div>}
+         {Object.keys(cart).length!==0 &&Object.keys(cart).map((item:any)=>{
+          return  <li key={item}>
             <div className="item flex my-5">
-              <div className="w-2/3 font-semibold ">Tshirts - wear the code</div>
+              <div className="w-2/3 font-semibold ">Tshirts - wear the code {cart[item].name}</div>
               <div className="flex font-semibold items-center justify-center w-1/3 text-lg ">
-                <AiFillMinusCircle className='cursor-pointer text-pink-500' />
-                <span className='mx-2'>1</span>
-                <AiFillPlusCircle />
+                <AiFillMinusCircle onClick={()=>{removeFromCart(item , 1,cart[item].price,cart[item].name,cart[item].size,cart[item].variant)}}  className='cursor-pointer text-pink-500' />
+                <span className='mx-2'>{cart[item].qty}</span>
+                <AiFillPlusCircle onClick={()=>{addToCart(item , 1,cart[item].price,cart[item].name,cart[item].size,cart[item].variant)}}/>
               </div>
             </div>
           </li>
-          <li >
-            <div className="item flex my-5">
-              <div className="w-2/3 font-semibold ">Tshirts - wear the code</div>
-              <div className="flex font-semibold items-center justify-center w-1/3 text-lg ">
-                <AiFillMinusCircle className='cursor-pointer text-pink-500' />
-                <span className='mx-2'>1</span>
-                <AiFillPlusCircle />
-              </div>
-            </div>
-          </li>
-          <li >
-            <div className="item flex my-5">
-              <div className="w-2/3 font-semibold ">Tshirts - wear the code</div>
-              <div className="flex font-semibold items-center justify-center w-1/3 text-lg ">
-                <AiFillMinusCircle className='cursor-pointer text-pink-500' />
-                <span className='mx-2'>1</span>
-                <AiFillPlusCircle />
-              </div>
-            </div>
-          </li>
-          <li >
-            <div className="item flex my-5">
-              <div className="w-2/3 font-semibold ">Tshirts - wear the code</div>
-              <div className="flex font-semibold items-center justify-center w-1/3 text-lg ">
-                <AiFillMinusCircle className='cursor-pointer text-pink-500' />
-                <span className='mx-2'>1</span>
-                <AiFillPlusCircle />
-              </div>
-            </div>
-          </li>
+         })
+         }
         </ol>
         <div className='flex justify-around'>
             <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-1 focus:outline-none hover:bg-pink-500 rounded text-sm'> <BsFillBagCheckFill className='m-1'/> Check Out</button>
-        <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' >Clear Cart</button> 
+        <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm'>Clear Cart</button> 
         </div>
      
       </div>
