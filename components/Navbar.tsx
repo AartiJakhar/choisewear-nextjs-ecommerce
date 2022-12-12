@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useRef ,useEffect} from 'react'
 import { AiOutlineShoppingCart, AiFillCloseCircle, AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 import {BsFillBagCheckFill} from "react-icons/bs"
-export default function Navbar({addToCart,cart,removeFromCart,}:any) {
+export default function Navbar({addToCart,cart,removeFromCart,clearCart}:any) {
   const ref: any = useRef()
   useEffect(() => {
     // addToCart()
@@ -41,7 +41,7 @@ export default function Navbar({addToCart,cart,removeFromCart,}:any) {
 
         </button>
       </div>
-      <div ref={ref} className="sidecart absolute right-0 top-0 bg-pink-100 p-10 transition-transform translate-x-full">
+      <div ref={ref} className={`sidecart h-[100vh] absolute right-0 top-0 bg-pink-100 p-10 transition-transform ${Object.keys(cart).length===0?"translate-x-full":"translate-x-0"}`}>
         <h2 className='font-bold text-xl  text-center'>Shoping Cart</h2>
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl  "><AiFillCloseCircle /></span>
         <ol className='list-decimal font-semibold'>
@@ -61,8 +61,8 @@ export default function Navbar({addToCart,cart,removeFromCart,}:any) {
          }
         </ol>
         <div className='flex justify-around'>
-            <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-1 focus:outline-none hover:bg-pink-500 rounded text-sm'> <BsFillBagCheckFill className='m-1'/> Check Out</button>
-        <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm'>Clear Cart</button> 
+           <Link href={"/checkout"}> <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-1 focus:outline-none hover:bg-pink-500 rounded text-sm'> <BsFillBagCheckFill className='m-1'/> Check Out</button></Link>
+        <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart}>Clear Cart</button> 
         </div>
      
       </div>

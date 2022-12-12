@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import {useState,useEffect} from "react"
 export default function App({ Component, pageProps }: AppProps) {
 const [cart, setCart] = useState({})
-const [subtotal, setSubtotal] = useState()
+const [subtotal, setSubtotal] = useState(0)
   // Inject types that this component accepts
 const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
   addToCart: any,
@@ -17,7 +17,9 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
  useEffect(() => {
   try {
     if(localStorage.getItem("cart")){
+
     setCart(JSON.parse(localStorage.getItem("cart") as any))
+    setSubtotal(JSON.parse(localStorage.getItem("subtotal") as any))
   }
   } catch (error) {
     console.error(error)
@@ -28,15 +30,19 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
  
  const saveCart=(mycart:any)=>{
        localStorage.setItem("cart",JSON.stringify(mycart))
+       localStorage.setItem("subtotal",JSON.stringify(subtotal))
        let subt:any=0;
        let keys= Object.keys(cart)
        console.log(mycart)
        console.log(mycart.length !=0)
-       if(mycart[keys[1]]){
+      //  if(mycart[keys]){
        for (let i = 0; i <keys.length; i++) {
-        subt +=mycart[keys[i]].price*mycart[keys[i]].qty;
+        if(mycart[keys[i]]){
+          subt +=mycart[keys[i]].price*mycart[keys[i]].qty;
+        }
         
-       }}
+      //  }
+      }
        setSubtotal(subt)
  }
   const addToCart=(itemCode:number,qty:number,price:number,name:string,size:string,variant:string)=>{
@@ -69,6 +75,6 @@ saveCart({})
  }
   return <>
    <Navbar addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />
-   <Component addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} {...pageProps} />
+   <Component subtotal={subtotal} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} {...pageProps} />
    <Footer/></>
 }
