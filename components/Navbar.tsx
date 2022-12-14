@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useRef ,useEffect} from 'react'
-import { AiOutlineShoppingCart, AiFillCloseCircle, AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
+import {AiOutlineShoppingCart, AiFillCloseCircle, AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 import {BsFillBagCheckFill} from "react-icons/bs"
+import {FaUserAlt} from "react-icons/fa"
 export default function Navbar({addToCart,cart,removeFromCart,clearCart}:any) {
   const ref: any = useRef()
   useEffect(() => {
@@ -37,13 +38,20 @@ export default function Navbar({addToCart,cart,removeFromCart,clearCart}:any) {
           <Link href={"/items/mugs"} className="mr-5 hover:text-gray-900">Mugs</Link>
           <Link href={"/items/stickers"} className="mr-5 hover:text-gray-900">Stickers</Link>
         </nav>
-        <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" onClick={toggleCart}>Cart<AiOutlineShoppingCart />
+ <div>
+        <button className=" mx-3 inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" onClick={toggleCart}>Cart<AiOutlineShoppingCart />
 
         </button>
+        <Link href={"/login"} className=" inline-flex items-center bg-gray-100 border-0 py-2 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"> <FaUserAlt/>
+        </Link>
+
+ </div>
+
       </div>
       <div ref={ref} className={`sidecart h-[100vh] absolute right-0 top-0 bg-pink-100 p-10 transition-transform ${Object.keys(cart).length===0?"translate-x-full":"translate-x-0"}`}>
         <h2 className='font-bold text-xl  text-center'>Shoping Cart</h2>
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl  "><AiFillCloseCircle /></span>
+       
         <ol className='list-decimal font-semibold'>
          { Object.keys(cart).length===0 && <div>no items in the cart</div>}
          {Object.keys(cart).length!==0 &&Object.keys(cart).map((item:any)=>{
