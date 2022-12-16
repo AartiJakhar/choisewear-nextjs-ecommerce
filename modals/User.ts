@@ -15,4 +15,5 @@ const UserSchema = new mongoose.Schema({
     require: true,
   }
 },{timestamps:true});
-export default mongoose.model("Product",UserSchema)
+mongoose.models={}
+export default mongoose.model("User",UserSchema)

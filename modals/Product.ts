@@ -4,6 +4,11 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  slug: {
+    type: String,
+    require: true,
+    unique:true
+  },
   desc: {
     type: String,
     require: true,
@@ -31,4 +36,5 @@ const ProductSchema = new mongoose.Schema({
     required:true
   },
 },{timestamps:true});
+mongoose.models={}
 export default mongoose.model("Product",ProductSchema)
