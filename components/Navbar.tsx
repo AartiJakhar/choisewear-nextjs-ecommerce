@@ -6,13 +6,7 @@ import {BsFillBagCheckFill} from "react-icons/bs"
 import {FaUserAlt} from "react-icons/fa"
 export default function Navbar({addToCart,cart,removeFromCart,clearCart}:any) {
   const ref: any = useRef()
-  useEffect(() => {
-    // addToCart()
-    if(cart.length!==0){
-      console.log(Object.keys(cart))
 
-    }
-  }, [cart])
   
   const toggleCart = () => {
     if (ref.current.classList.contains('translate-x-full')) {

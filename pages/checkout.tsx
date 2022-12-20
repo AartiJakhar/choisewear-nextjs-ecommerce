@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import {   AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 export default function checkout({addToCart,cart,removeFromCart,clearCart,subtotal}:any) {
-
+console.log(cart)
   return (
     <div className='container m-auto'>
  <h1 className='font-bold text-3xl my-8 text-center'>Checkouts</h1>
@@ -53,7 +53,7 @@ export default function checkout({addToCart,cart,removeFromCart,clearCart,subtot
          {Object.keys(cart).length!==0 &&Object.keys(cart).map((item:any)=>{
           return  <li key={item}>
             <div className="item flex my-5">
-              <div className="w-2/3 font-semibold ">Tshirts - wear the code {cart[item].name}</div>
+              <div className="w-2/3 font-semibold ">Tshirts -  {cart[item].name + " - " + cart[item].variant + " - " + cart[item].size } </div>
               <div className="flex font-semibold items-center justify-center w-1/3 text-lg ">
                 <AiFillMinusCircle onClick={()=>{removeFromCart(item , 1,cart[item].price,cart[item].name,cart[item].size,cart[item].variant)}}  className='cursor-pointer text-pink-500' />
                 <span className='mx-2'>{cart[item].qty}</span>

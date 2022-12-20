@@ -7,7 +7,7 @@ export default function Home() {
     <Head>
        <title>CodesWear.com - Wear the code</title>
        <meta  name="description" content="CodesWear.com - Wear the code"/>
-       <link rel="icon" href="/ico.png"/>
+       <link rel="icon" href="/fevicon.png"/>
     </Head>
     <Content/>
     <h1>hello</h1>

@@ -13,6 +13,7 @@ const handler = async(
     try {
          if(req.method=="POST"){
          for (let i = 0; i < req.body.length; i++) {
+             
         let p =new Product({
   title: req.body[i].title,
   slug:req.body[i].slug,
@@ -28,7 +29,8 @@ const handler = async(
            await p.save() 
          }
           res.status(200).json({success:true,errorr:"no error occured"})
-    }else{
+        }
+    else{
         res.status(400).json({errorr:"This method is not allowed",success:false})
     }
     } catch (error:any) {
