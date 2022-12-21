@@ -10,25 +10,25 @@ const handler = async(
   res: NextApiResponse<Data>
 )=> {
     let products =await Product.find({ category:req.query.category})
-    let tshirts:any={};
+    let categoryProducts:any={};
       for(let item of products){
-        if(item.title in tshirts){
-            if(!tshirts[item.title].color.includes(item.color)&& item.availableQty>0){
-              tshirts[item.title].color.push(item.color)
+        if(item.title in categoryProducts){
+            if(!categoryProducts[item.title].color.includes(item.color)&& item.availableQty>0){
+              categoryProducts[item.title].color.push(item.color)
             }
-            if(!tshirts[item.title].size.includes(item.size) && item.availableQty>0){
-              tshirts[item.title].size.push(item.size)
+            if(!categoryProducts[item.title].size.includes(item.size) && item.availableQty>0){
+              categoryProducts[item.title].size.push(item.size)
             }
         }
         else{
-         tshirts[item.title]=JSON.parse(JSON.stringify(item))
+          categoryProducts[item.title]=JSON.parse(JSON.stringify(item))
           if(item.availableQty>0){
-            tshirts[item.title].color=[item.color]
-            tshirts[item.title].size=[item.size]
+            categoryProducts[item.title].color=[item.color]
+            categoryProducts[item.title].size=[item.size]
           }
         }
       }
-  res.status(200).json({tshirts})
+  res.status(200).json({categoryProducts})
 }
 
 export default connectDb(handler)

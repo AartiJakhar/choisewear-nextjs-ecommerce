@@ -10,7 +10,7 @@ const handler = async(
   res: NextApiResponse<Data>
 )=> {
     let product =await Product.findOne({ slug:req.query.slug})
-    let variants =await Product.find({ title:product.title})
+    let variants =await Product.find({ title:product.title,category:product.category})
     let colorSizeSlug:any={}
 
       for(let item of variants){

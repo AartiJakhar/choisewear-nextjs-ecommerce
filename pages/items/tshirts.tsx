@@ -2,32 +2,33 @@ import Link from 'next/link'
 import React,{useEffect} from 'react'
 
 export default function tshirts({data}:any) {
-  const {tshirts}=data;
+  const {categoryProducts}=data;
  
   
   return (
     <section className="text-gray-600 body-font">
     <div className="container px-5 py-24 mx-auto">
       <div className="flex flex-wrap justify-around -m-4">
-       {tshirts && Object.keys(tshirts).map((e:any)=>{
-        return <div key={tshirts[e]._id} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4  ">
-          <Link href={`/product/${tshirts[e].slug}`}  className=" block h-[60%] relative  rounded overflow-hidden">
-            <img  alt="ecommerce" className="m-auto object-cover object-top  block" src={tshirts[e].img} />
+       {categoryProducts && Object.keys(categoryProducts).map((e:any)=>{
+        return <div key={categoryProducts[e]._id} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4  ">
+          <Link href={`/product/${categoryProducts[e].slug}`}  className=" block h-[60%] relative  rounded overflow-hidden">
+            <img  alt="ecommerce" className="m-auto object-cover object-top  block" src={categoryProducts[e].img} />
           </Link>
           <div className="mt-4">
-            <h3 className="text-gray-500 text-3xl md:text-xs tracking-widest title-font mb-1">{tshirts[e].category}</h3>
-            <h2 className=" my-2 text-gray-900 title-font text-lg font-medium">{tshirts[e].title}</h2>
-            <h3>{tshirts[e].desc}</h3>
+            <h3 className="text-gray-500 text-3xl md:text-xs tracking-widest title-font mb-1">{categoryProducts[e].category}</h3>
+            <h2 className=" my-2 text-gray-900 title-font text-lg font-medium">{categoryProducts[e].title}</h2>
+            <h3>{categoryProducts[e].desc}</h3>
             <div className='my-3'>
- {tshirts[e].size.map((e:string)=>{
+ {categoryProducts[e].size.map((e:string)=>{
                return <span key={e} className=' border-solid border-2 border-slate-300 mx-1 px-2'>{e }</span>
             })}
- {tshirts[e].color.map((e:string)=>{
-               return <button key={e} className={`border-2 border-gray-300 ml-1 bg-${e==="black"?'neutral':e}-500 rounded-full w-6 h-6 focus:outline-none`}></button>
+ {categoryProducts[e].color.map((e:string)=>{
+               return <button key={e} className={`border-2 border-gray-300 ml-1 bg-${e==="black"?'neutral':e}-500 rounded-full w-6 h-6 focus:outline-none`} style={{background:`${e==='black' && "black" || e==='green' && "green" ||e==='yellow' && "yellow"|| e==='red' && "red"}`}} ></button>
             })}
+            <button className="border-2 border-gray-300 ml-1 bg-red-500 rounded-full w-6 h-6 focus:outline-none"></button>
             </div>
            
-            <p className="mt-1"> ₹ {tshirts[e].price}</p>
+            <p className="mt-1"> ₹ {categoryProducts[e].price}</p>
           </div>
         </div>
        }) }

@@ -1,92 +1,46 @@
-import React from 'react'
 import Link from 'next/link'
-export default function mugs() {
+import React,{useEffect} from 'react'
+
+export default function Mugs({data}:any) {
+  const {categoryProducts}=data;
+  
   return (
     <section className="text-gray-600 body-font">
     <div className="container px-5 py-24 mx-auto">
       <div className="flex flex-wrap justify-around -m-4">
-        <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4  ">
-          <Link href={"/product/the-catalyzer"}  className="block relative h-48 rounded overflow-hidden">
-            <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://m.media-amazon.com/images/I/71leZG4v1+L._AC_CR0%2C0%2C0%2C0_SX615_SY462_.jpg"/>
+        {/* {hoodies.length === 0 && <h1>soory not available now </h1>} */}
+       {categoryProducts && Object.keys(categoryProducts).map((e:any)=>{
+        return <div key={categoryProducts[e]._id} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4  ">
+          <Link href={`/product/${categoryProducts[e].slug}`}  className=" block h-[60%] relative  rounded overflow-hidden">
+            <img  alt="ecommerce" className="m-auto object-cover object-top  block" src={categoryProducts[e].img} />
           </Link>
           <div className="mt-4">
-            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-            <h2 className="text-gray-900 title-font text-lg font-medium">The Catalyzer</h2>
-            <p className="mt-1">$16.00</p>
+            <h3 className="text-gray-500 text-3xl md:text-xs tracking-widest title-font mb-1">{categoryProducts[e].category}</h3>
+            <h2 className=" my-2 text-gray-900 title-font text-lg font-medium">{categoryProducts[e].title}</h2>
+            <h3>{categoryProducts[e].desc}</h3>
+            <div className='my-3'>
+ {categoryProducts[e].size.map((e:string)=>{
+               return <span key={e} className=' border-solid border-2 border-slate-300 mx-1 px-2'>{e }</span>
+            })}
+ {categoryProducts[e].color.map((e:string)=>{
+               return <button key={e} className={`border-2 border-gray-300 ml-1 bg-${e==="black"?'neutral':e}-500 rounded-full w-6 h-6 focus:outline-none`} style={{background:`${e==='black' && "black" || e==='green' && "green" ||e==='yellow' && "yellow"|| e==='red' && "red"}`}}></button>
+            })}
+            </div>
+           
+            <p className="mt-1"> ₹ {categoryProducts[e].price}</p>
           </div>
         </div>
-        <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4">
-          <Link href={"/product/the-catalyzer"}  className="block relative h-48 rounded overflow-hidden">
-            <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://m.media-amazon.com/images/I/71leZG4v1+L._AC_CR0%2C0%2C0%2C0_SX615_SY462_.jpg"/>
-          </Link>
-          <div className="mt-4">
-            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-            <h2 className="text-gray-900 title-font text-lg font-medium">Shooting Stars</h2>
-            <p className="mt-1">$21.15</p>
-          </div>
-        </div>
-        <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4">
-          <Link href={"/product/the-catalyzer"}  className="block relative h-48 rounded overflow-hidden">
-            <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://m.media-amazon.com/images/I/71leZG4v1+L._AC_CR0%2C0%2C0%2C0_SX615_SY462_.jpg"/>
-          </Link>
-          <div className="mt-4">
-            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-            <h2 className="text-gray-900 title-font text-lg font-medium">Neptune</h2>
-            <p className="mt-1">$12.00</p>
-          </div>
-        </div>
-        <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4">
-          <Link href={"/product/the-catalyzer"}  className="block relative h-48 rounded overflow-hidden">
-            <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://m.media-amazon.com/images/I/71leZG4v1+L._AC_CR0%2C0%2C0%2C0_SX615_SY462_.jpg"/>
-          </Link>
-          <div className="mt-4">
-            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-            <h2 className="text-gray-900 title-font text-lg font-medium">The 400 Blows</h2>
-            <p className="mt-1">$18.40</p>
-          </div>
-        </div>
-        <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4">
-          <Link href={"/product/the-catalyzer"}  className="block relative h-48 rounded overflow-hidden">
-            <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://m.media-amazon.com/images/I/71M1XRwOWSL._AC_CR0%2C0%2C0%2C0_SX615_SY462_.jpg"/>
-          </Link>
-          <div className="mt-4">
-            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-            <h2 className="text-gray-900 title-font text-lg font-medium">The Catalyzer</h2>
-            <p className="mt-1">$16.00</p>
-          </div>
-        </div>
-        <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4">
-          <Link href={"/product/the-catalyzer"}  className="block relative h-48 rounded overflow-hidden">
-            <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://m.media-amazon.com/images/I/71leZG4v1+L._AC_CR0%2C0%2C0%2C0_SX615_SY462_.jpg"/>
-          </Link>
-          <div className="mt-4">
-            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-            <h2 className="text-gray-900 title-font text-lg font-medium">Shooting Stars</h2>
-            <p className="mt-1">$21.15</p>
-          </div>
-        </div>
-        <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4">
-          <Link href={"/product/the-catalyzer"}  className="block relative h-48 rounded overflow-hidden">
-            <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://m.media-amazon.com/images/I/71leZG4v1+L._AC_CR0%2C0%2C0%2C0_SX615_SY462_.jpg"/>
-          </Link>
-          <div className="mt-4">
-            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-            <h2 className="text-gray-900 title-font text-lg font-medium">Neptune</h2>
-            <p className="mt-1">$12.00</p>
-          </div>
-        </div>
-        <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4">
-          <Link href={"/product/the-catalyzer"}  className="block relative h-48 rounded overflow-hidden">
-            <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://m.media-amazon.com/images/I/71M1XRwOWSL._AC_CR0%2C0%2C0%2C0_SX615_SY462_.jpg"/>
-          </Link>
-          <div className="mt-4">
-            <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-            <h2 className="text-gray-900 title-font text-lg font-medium">The 400 Blows</h2>
-            <p className="mt-1">$18.40</p>
-          </div>
-        </div>
+       }) }
       </div>
     </div>
   </section>
   )
+}
+export async function getServerSideProps() {
+  // Fetch data from external data source
+  const res = await fetch(`http://localhost:3000/api/getproduct?category=Mugs`)
+  const data = await res.json()
+
+  // Pass data to the page via props
+  return { props: { data } }
 }

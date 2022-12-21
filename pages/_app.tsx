@@ -4,6 +4,7 @@ import _Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import {useState,useEffect} from "react"
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 const [cart, setCart] = useState({})
@@ -83,6 +84,11 @@ saveCart({})
  }
   return <>
    <Navbar addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />
+   <Head>
+       <title>CodesWear.com - Wear the code</title>
+       <meta  name="description" content="CodesWear.com - Wear the code"/>
+       <link rel="icon" href="/fevicon.png"/>
+    </Head>
    <Component buyNow={buyNow} subtotal={subtotal} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} {...pageProps} />
    <Footer/></>
 }
