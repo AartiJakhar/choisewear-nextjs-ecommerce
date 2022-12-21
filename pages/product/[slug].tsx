@@ -1,9 +1,8 @@
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export default function Post({ addToCart, data,buyNow }: any) {
-  const router = useRouter()
+
   const [pincode, setPincode] = useState("")
   const [checkpin, setcheckpin]: any = useState()
   const { product, variants } = data
@@ -17,7 +16,6 @@ export default function Post({ addToCart, data,buyNow }: any) {
     const pinJson = await pins.json()
     if (pinJson.arr.includes(parseInt(pincode))) {
       setcheckpin(true)
-        console.log('first')
         toast.success('🦄 Wow  Pincode is serviceable', {
           position: "top-right",
           autoClose: 1000,
