@@ -42,7 +42,7 @@ export default function Navbar({addToCart,cart,removeFromCart,clearCart}:any) {
  </div>
 
       </div>
-      <div ref={ref} className={`sidecart h-[100vh] absolute right-0 top-0 bg-pink-100 p-10 transition-transform ${Object.keys(cart).length===0?"translate-x-full":"translate-x-0"}`}>
+      <div ref={ref} className={`sidecart h-[100vh]  overflow-auto absolute right-0 top-0 bg-pink-100 p-10 transition-transform ${Object.keys(cart).length===0?"translate-x-full":"translate-x-0"}`}>
         <h2 className='font-bold text-xl  text-center'>Shoping Cart</h2>
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl  "><AiFillCloseCircle /></span>
        
@@ -51,7 +51,7 @@ export default function Navbar({addToCart,cart,removeFromCart,clearCart}:any) {
          {Object.keys(cart).length!==0 &&Object.keys(cart).map((item:any)=>{
           return  <li key={item}>
             <div className="item flex my-5">
-              <div className="w-2/3 font-semibold ">Tshirts - wear the code {cart[item].name}</div>
+              <div className="w-2/3 font-semibold ">Tshirts - {cart[item].name} ({cart[item].variant}/{cart[item].size})</div>
               <div className="flex font-semibold items-center justify-center w-1/3 text-lg ">
                 <AiFillMinusCircle onClick={()=>{removeFromCart(item , 1,cart[item].price,cart[item].name,cart[item].size,cart[item].variant)}}  className='cursor-pointer text-pink-500' />
                 <span className='mx-2'>{cart[item].qty}</span>

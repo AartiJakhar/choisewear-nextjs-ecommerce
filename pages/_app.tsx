@@ -3,7 +3,9 @@ import type { AppProps } from 'next/app'
 import _Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import {useState,useEffect} from "react"
+import { useRouter } from 'next/router'
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter()
 const [cart, setCart] = useState({})
 const [subtotal, setSubtotal] = useState(0)
   // Inject types that this component accepts
@@ -60,6 +62,12 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
 saveCart({})
     setCart({})
   }
+  const buyNow=async(itemCode:number,qty:number,price:number,name:string,size:string,variant:string)=>{
+    let newCart={ itemCode:{qty:1,price,name,size,variant}}
+    setCart(newCart)
+    saveCart(newCart)
+    router.push('/checkout')
+  }
   const removeFromCart=(itemCode:number,qty:number,price:number,name:string,size:string,variant:string)=>{
   
     const newCart:any=JSON.parse(JSON.stringify(cart));
@@ -75,6 +83,6 @@ saveCart({})
  }
   return <>
    <Navbar addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />
-   <Component subtotal={subtotal} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} {...pageProps} />
+   <Component buyNow={buyNow} subtotal={subtotal} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} {...pageProps} />
    <Footer/></>
 }
