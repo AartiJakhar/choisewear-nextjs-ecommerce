@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React ,{useState}from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-export default function signup() {
+export default function Signup() {
     const [credentials, setCredentials] = useState({name:"",email:"",password:""})
     const onChangeCredentials=(e:any)=>{
           setCredentials({...credentials,[e.target.name]:e.target.value})
