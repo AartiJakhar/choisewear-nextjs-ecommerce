@@ -47,7 +47,7 @@ export default function Navbar({addToCart,cart,removeFromCart,clearCart}:any) {
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl  "><AiFillCloseCircle /></span>
        
         <ol className='list-decimal font-semibold'>
-         { Object.keys(cart).length===0 && <div>no items in the cart</div>}
+         { Object.keys(cart).length===0 && <div className='text-center my-1 text-red-600'>no items in the cart</div>}
          {Object.keys(cart).length!==0 &&Object.keys(cart).map((item:any)=>{
           return  <li key={item}>
             <div className="item flex my-5">
@@ -62,9 +62,9 @@ export default function Navbar({addToCart,cart,removeFromCart,clearCart}:any) {
          })
          }
         </ol>
-        <div className='flex justify-around'>
-           <Link href={"/checkout"}> <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-1 focus:outline-none hover:bg-pink-500 rounded text-sm'> <BsFillBagCheckFill className='m-1'/> Check Out</button></Link>
-        <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart}>Clear Cart</button> 
+        <div className='flex align-middle justify-between mt-3  flex-wrap  '>
+           <Link href={"/checkout"}> <button className='flex my-3 text-white bg-pink-500 border-0 py-2 px-1 focus:outline-none hover:bg-pink-500 rounded text-sm'> <BsFillBagCheckFill className='m-1'/> Check Out</button></Link>
+        <button className='my-3 mx-2  text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart}>Clear Cart</button> 
         </div>
      
       </div>

@@ -2,8 +2,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import connectDb from '../../midleware/mongoose'
 import User from '../../modals/User'
+import {genSalt,hash} from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
 type Data = {
-    errorr: string,
+    error: string,
     success:boolean,
 }
 const handler = async(
@@ -13,16 +16,35 @@ const handler = async(
          if(req.method=="POST"){
        try { 
         let {name,email,password}=req.body
-        let user=new User({name,email,password})
+        let user = await User.findOne({email:email})
+        if(user){
+          res.status(400).json({error:"sorry a user with this email already exists", success:false});
+      }else{
+        //for add salt 
+        let salt=await genSalt(10)
+        let secPass=await hash(password,salt)
+         user=await new User({name:name,email:email,password:secPass})
         // let user=new User(req.body)
+
         await user.save()
-          res.status(200).json(user)
+
+        //web token 
+        //referense--jwt.io,npm
+       const data ={
+        user:{ 
+           id:user.id
+      }}
+      const authtoken= await jwt.sign(data,process.env.JWT_SECRET)
+    
+          res.status(200).json(authtoken)
+         
         }
+      }
      catch (error:any) {
         res.status(400).json(error)
     }
 }else{
-        res.status(400).json({errorr:"This method is not allowed",success:false})
+        res.status(400).json({error:"This method is not allowed",success:false})
     
     }
    
