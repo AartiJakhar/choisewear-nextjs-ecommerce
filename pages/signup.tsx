@@ -6,8 +6,9 @@ export default function Signup() {
     const [credentials, setCredentials] = useState({name:"",email:"",password:""})
     const onChangeCredentials=(e:any)=>{
           setCredentials({...credentials,[e.target.name]:e.target.value})
-          console.log(e.target.name + " " + e.target.value)
+         
     }
+
     const signUp=async(e:any)=>{
              e.preventDefault()
             let data = await fetch('http://localhost:3000/api/signup',{
@@ -18,7 +19,6 @@ export default function Signup() {
                 body: JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password})
               })
               const userData= await data.json()
-              console.log(userData)
                 localStorage.setItem('token',userData.authtoken)
                  setCredentials({name:"",email:"",password:""})
           toast.success('🦄 You have Created Your account', {

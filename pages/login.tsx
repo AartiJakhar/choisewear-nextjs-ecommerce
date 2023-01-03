@@ -8,7 +8,7 @@ export default function Login() {
     const [credentials, setCredentials] = useState({name:"",email:"",password:""})
     const onChangeCredentials=(e:any)=>{
         setCredentials({...credentials,[e.target.name]:e.target.value})
-        console.log(e.target.name + " " + e.target.value)
+       
   }
     const logIn=async(e:any)=>{
     e.preventDefault()
@@ -49,7 +49,6 @@ export default function Login() {
         });
         setCredentials({name:"",email:"",password:""})
   
-    console.log(userData)
 }
  
     }

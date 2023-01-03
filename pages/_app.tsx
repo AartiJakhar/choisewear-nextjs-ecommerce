@@ -5,9 +5,13 @@ import Footer from '../components/Footer'
 import {useState,useEffect} from "react"
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 const [cart, setCart] = useState({})
+const [key, setKey]  = useState(0)
+const [user, setUser] = useState<object>({value:null})
 const [subtotal, setSubtotal] = useState(0)
   // Inject types that this component accepts
 const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
@@ -15,7 +19,9 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
   cart:any,
   removeFromCart:any,
   clearCart:any,
-  subtotal:any
+  subtotal:any,
+  user:object,
+  logOut:Function,
  }>
  useEffect(() => {
   try {
@@ -28,8 +34,9 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
     console.error(error)
     localStorage.clear()
   }
- 
- }, [])
+ setKey(Math.random())
+ setUser({value : localStorage.getItem("token")})
+ }, [router.query])
  
  const saveCart=(mycart:any)=>{
        localStorage.setItem("cart",JSON.stringify(mycart))
@@ -82,13 +89,28 @@ saveCart({})
     setCart(newCart)
     saveCart(newCart)
  }
+ const logOut=()=>{
+  localStorage.removeItem("token")
+  setUser({value:null})
+    toast.success('🦄 You have SuccessFully Loged Out ', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+ }
   return <>
-   <Navbar addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />
    <Head>
        <title>CodesWear.com - Wear the code</title>
        <meta  name="description" content="CodesWear.com - Wear the code"/>
        <link rel="icon" href="/fevicon.png"/>
     </Head>
+   <Navbar key={key} user={user} logOut={logOut} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />
+       <ToastContainer/>
    <Component buyNow={buyNow} subtotal={subtotal} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} {...pageProps} />
    <Footer/></>
 }

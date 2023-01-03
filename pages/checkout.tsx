@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import {   AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 export default function checkout({addToCart,cart,removeFromCart,clearCart,subtotal}:any) {
-console.log(cart)
+
   return (
     <div className='container m-auto'>
  <h1 className='font-bold text-3xl my-8 text-center'>Checkouts</h1>
