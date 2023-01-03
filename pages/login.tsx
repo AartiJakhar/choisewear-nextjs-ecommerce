@@ -59,7 +59,7 @@ export default function Login() {
   <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-pink-900 dark:text-black">
           <img className="w-14  mr-2" src="/logo.png" alt="logo"/>
-         Codes Wear   
+          Choice Wear   
       </a>
       <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-white-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

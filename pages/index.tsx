@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <>
     <Head>
-       <title>CodesWear.com - Wear the code</title>
-       <meta  name="description" content="CodesWear.com - Wear the code"/>
+       <title>ChoiceWear.com - Wear the code</title>
+       <meta  name="description" content="ChoiceWear.com - Wear the code"/>
        <link rel="icon" href="/fevicon.png"/>
     </Head>
     <Content/>

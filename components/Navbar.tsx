@@ -23,7 +23,7 @@ export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, c
 
       <div className="container mx-auto flex flex-wrap  flex-col md:flex-row items-center">
         <Link href={"/"} className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-          <Image height={10} width={80} src={"/logo.png"} alt="codeswear"></Image>
+          <Image height={10} width={80} src={"/logo.png"} alt="choicewear"></Image>
 
         </Link>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">

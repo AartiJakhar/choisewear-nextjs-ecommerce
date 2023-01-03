@@ -105,8 +105,8 @@ saveCart({})
  }
   return <>
    <Head>
-       <title>CodesWear.com - Wear the code</title>
-       <meta  name="description" content="CodesWear.com - Wear the code"/>
+       <title>ChoiceWear.com - Wear the code</title>
+       <meta  name="description" content="ChoiceWear.com - Wear the code"/>
        <link rel="icon" href="/fevicon.png"/>
     </Head>
    <Navbar key={key} user={user} logOut={logOut} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />

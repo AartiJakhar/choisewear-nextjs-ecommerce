@@ -9,9 +9,9 @@ export default function Footer() {
       <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
         <Link  href={"/"} className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
        
-          <Image height={10} width={80} src={"/logo.png"} alt="codeswear"></Image>
+          <Image height={10} width={80} src={"/logo.png"} alt="choicewear"></Image>
 
-          <span className=" text-3xl">CodesWear</span>
+          <span className=" text-3xl">ChoiceWear</span>
         </Link>
       </div>
       <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
@@ -87,7 +87,7 @@ export default function Footer() {
     </div>
     <div className="bg-gray-100">
       <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-        <p className="text-gray-500 text-sm text-center sm:text-left">© 2020  CodesWear.com  - All Rights Reserved
+        <p className="text-gray-500 text-sm text-center sm:text-left">© 2020  Choicewear.com  - All Rights Reserved
         
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">

@@ -6,7 +6,7 @@ export default function order() {
     <div className="container px-5 py-24 mx-auto">
       <div className="lg:w-4/5 mx-auto flex flex-wrap">
         <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-          <h2 className="text-sm title-font text-gray-500 tracking-widest">CodesWear.com</h2>
+          <h2 className="text-sm title-font text-gray-500 tracking-widest">Choicewear.com</h2>
           <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">Order Id : 4455663</h1>
           <p className="leading-relaxed mb-4">Your order has been successfully placed </p>
           <div className="flex mb-4">
