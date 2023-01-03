@@ -36,7 +36,7 @@ const handler = async(
       }}
       const authtoken= await jwt.sign(data,process.env.JWT_SECRET)
     
-          res.status(200).json(authtoken)
+          res.status(200).json({authtoken,success:true})
          
         }
       }

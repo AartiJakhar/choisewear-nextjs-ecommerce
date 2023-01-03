@@ -17,7 +17,10 @@ export default function Signup() {
                 },
                 body: JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password})
               })
-        setCredentials({name:"",email:"",password:""})
+              const userData= await data.json()
+              console.log(userData)
+                localStorage.setItem('token',userData.authtoken)
+                 setCredentials({name:"",email:"",password:""})
           toast.success('🦄 You have Created Your account', {
           position: "top-right",
           autoClose: 2000,
@@ -28,6 +31,8 @@ export default function Signup() {
           progress: undefined,
           theme: "light",
           });
+              
+       
     }
   return (
     <section className="bg-white-50 dark:bg-white-900">

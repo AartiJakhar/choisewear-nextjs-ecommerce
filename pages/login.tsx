@@ -22,7 +22,6 @@ export default function Login() {
       const userData=await data.json()
    if( !userData.success){
    
- 
         toast.error('Invalid credentials', {
             position: "top-right",
             autoClose: 2000,
@@ -33,7 +32,8 @@ export default function Login() {
             progress: undefined,
             theme: "light",
             });
-        }
+        }else{
+        localStorage.setItem('token',userData.authtoken)
             setTimeout(() => {
                 router.push('http://localhost:3000')
             }, 2000);
@@ -50,7 +50,7 @@ export default function Login() {
         setCredentials({name:"",email:"",password:""})
   
     console.log(userData)
-
+}
  
     }
   return (

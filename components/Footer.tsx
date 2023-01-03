@@ -105,3 +105,4 @@ export default function Footer() {
   </footer>
   )
 }
+// mongodb+srv://vercel-admin-user:eTxnGgQQjf05lcjJ@cluster0.407b4mz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority

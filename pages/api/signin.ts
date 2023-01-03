@@ -22,16 +22,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
               error: "Please try to login with correct credentials",
               success: false,
             });
-        }
+        }else{
         const data = {
           user: {
             id: user.id,
           },
         };
-        const authtoken = await jwt.sign(data, process.env.JWT_SECRET);
+        const authtoken = await jwt.sign(data, process.env.JWT_SECRET,{expiresIn:"2d"});
 
         res.status(200).json({authtoken,success:true});
-      } else {
+     } } else {
         res
           .status(400)
           .json({
