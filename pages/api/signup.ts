@@ -5,13 +5,13 @@ import User from '../../modals/User'
 import {genSalt,hash} from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-type Data = {
-    error: string,
-    success:boolean,
-}
+// type Data = {
+//     error: string,
+//     success:boolean,
+// }
 const handler = async(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 )=> {
          if(req.method=="POST"){
        try { 

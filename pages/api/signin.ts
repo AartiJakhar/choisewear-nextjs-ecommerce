@@ -4,11 +4,12 @@ import connectDb from "../../midleware/mongoose";
 import User from "../../modals/User";
 import { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
-type Data = {
-  error: string;
-  success: boolean;
-};
-const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+// type Data = {
+//   error: string;
+//   success: boolean;
+//   authtoken:any;
+// };
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method == "POST") {
     try {
       let { email, password } = req.body;
