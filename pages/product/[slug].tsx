@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-export default function Post({ addToCart, data, buyNow }: any) {
+export default function Post({ addToCart, data, buyNow ,nextauthUrl}: any) {
 
   const [pincode, setPincode] = useState("")
   const [checkpin, setcheckpin]: any = useState()
@@ -12,7 +12,7 @@ export default function Post({ addToCart, data, buyNow }: any) {
 
 
   const toogleClick = async () => {
-    const pins = await fetch('http://localhost:3000/api/pincode')
+    const pins = await fetch(` ${nextauthUrl}api/pincode`)
     const pinJson = await pins.json()
     if (pinJson.arr.includes(parseInt(pincode))) {
       setcheckpin(true)
@@ -48,7 +48,7 @@ export default function Post({ addToCart, data, buyNow }: any) {
   //to set size or color variant 
   const refreshVariant = (newSize: any, newColor: string) => {
 
-    let url: any = `http://localhost:3000/product/${variants[newColor][newSize]['slug']}`
+    let url: any = `${nextauthUrl}product/${variants[newColor][newSize]['slug']}`
     window.location = url;
   }
   return (
@@ -122,11 +122,12 @@ export default function Post({ addToCart, data, buyNow }: any) {
 
 export async function getServerSideProps(context: any) {
   // Fetch data from external data source
+  let nextauthUrl =process.env.NEXTAUTH_URL
   const { slug } = context.params
   const res = await fetch(`http://localhost:3000/api/product?slug=${slug}`)
   const data = await res.json()
 
   // Pass data to the page via props
-  return { props: { data } }
+  return { props: { data ,nextauthUrl} }
 }
 

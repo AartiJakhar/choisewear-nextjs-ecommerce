@@ -38,7 +38,7 @@ export default function Mugs({data}:any) {
 }
 export async function getServerSideProps() {
   // Fetch data from external data source
-  const res = await fetch(`http://localhost:3000/api/getproduct?category=Mugs`)
+  const res = await fetch(`${process.env.NEXTAUTH_URL}api/getproduct?category=Mugs`)
   const data = await res.json()
 
   // Pass data to the page via props

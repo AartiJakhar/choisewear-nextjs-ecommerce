@@ -3,7 +3,7 @@ import React ,{useState,useEffect}from 'react'
 import {useRouter} from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-export default function Signup() {
+export default function Signup({nextauthUrl}:any) {
        const router=useRouter();
     const [credentials, setCredentials] = useState({name:"",email:"",password:""})
     const onChangeCredentials=(e:any)=>{
@@ -13,7 +13,7 @@ export default function Signup() {
 
     const signUp=async(e:any)=>{
              e.preventDefault()
-            let data = await fetch('http://localhost:3000/api/signup',{
+            let data = await fetch(`${nextauthUrl}api/signup`,{
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export default function Signup() {
           });
           localStorage.setItem('token',userData.authtoken)
           setTimeout(() => {
-              router.push('http://localhost:3000')
+              router.push(`${nextauthUrl}`)
           }, 2000);
        
     }
@@ -84,3 +84,8 @@ export default function Signup() {
   </section>
   )
 }
+export async function getServerSideProps() {
+    let nextauthUrl =process.env.NEXTAUTH_URL
+  
+    return { props: { nextauthUrl } }
+  }
