@@ -34,8 +34,7 @@ const handler = async(
         user:{ 
            id:user.id
       }}
-      const authtoken= jwt.sign(data, process.env.JWT_SECRET)
-    
+      const authtoken= jwt.sign(data, process.env.JWT_SECRET!)
           res.status(200).json({authtoken,success:true})
          
         }
