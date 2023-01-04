@@ -124,7 +124,7 @@ export async function getServerSideProps(context: any) {
   // Fetch data from external data source
   let nextauthUrl =process.env.NEXTAUTH_URL
   const { slug } = context.params
-  const res = await fetch(`http://localhost:3000/api/product?slug=${slug}`)
+  const res = await fetch(`${nextauthUrl}api/product?slug=${slug}`)
   const data = await res.json()
 
   // Pass data to the page via props
