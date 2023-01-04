@@ -1,8 +1,10 @@
 import Link from 'next/link'
-import React ,{useState}from 'react'
+import React ,{useState,useEffect}from 'react'
+import {useRouter} from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export default function Signup() {
+       const router=useRouter();
     const [credentials, setCredentials] = useState({name:"",email:"",password:""})
     const onChangeCredentials=(e:any)=>{
           setCredentials({...credentials,[e.target.name]:e.target.value})
@@ -31,9 +33,17 @@ export default function Signup() {
           progress: undefined,
           theme: "light",
           });
-              
+          localStorage.setItem('token',userData.authtoken)
+          setTimeout(() => {
+              router.push('http://localhost:3000')
+          }, 2000);
        
     }
+        useEffect(() => {
+        if(localStorage.getItem('token')){
+       router.push('/')
+        }
+    }, [router])
   return (
     <section className="bg-white-50 dark:bg-white-900">
         {/* our toastify component */}
