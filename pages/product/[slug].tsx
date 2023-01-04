@@ -48,7 +48,7 @@ export default function Post({ addToCart, data, buyNow }: any) {
   //to set size or color variant 
   const refreshVariant = (newSize: any, newColor: string) => {
 
-    let url: string = `http://localhost:3000/product/${variants[newColor][newSize]['slug']}`
+    let url: any = `http://localhost:3000/product/${variants[newColor][newSize]['slug']}`
     window.location = url;
   }
   return (
