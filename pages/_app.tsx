@@ -7,12 +7,14 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingBar from 'react-top-loading-bar'
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 const [cart, setCart] = useState({})
 const [key, setKey]  = useState(0)
 const [user, setUser] = useState<object>({value:null})
 const [subtotal, setSubtotal] = useState(0)
+const [progress, setProgress] = useState(0)
   // Inject types that this component accepts
 const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
   addToCart: any,
@@ -24,6 +26,15 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
   logOut:Function,
  }>
  useEffect(() => {
+  
+  router.events.on('routeChangeStart', (()=>{
+     setProgress(30)
+  }))
+  router.events.on('routeChangeComplete', (()=>{
+     setProgress(100)
+  }))
+
+   
   try {
     if(localStorage.getItem("cart")){
 
@@ -109,6 +120,12 @@ saveCart({})
        <meta  name="description" content="ChoiceWear.com - Wear the code"/>
        <link rel="icon" href="/fevicon.png"/>
     </Head>
+    <LoadingBar
+        color='#f11946'
+        progress={progress}
+        waitingTime={400}
+        onLoaderFinished={() => setProgress(0)}
+      />
    <Navbar key={key} user={user} logOut={logOut} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />
        <ToastContainer/>
    <Component buyNow={buyNow} subtotal={subtotal} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} {...pageProps} />
