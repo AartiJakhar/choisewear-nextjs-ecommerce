@@ -11,8 +11,8 @@ export default function tshirts({ data }: any) {
         <div className="flex flex-wrap justify-around -m-4">
           {categoryProducts && Object.keys(categoryProducts).map((e: any) => {
             return <div key={categoryProducts[e]._id} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4  ">
-              <Link href={`/product/${categoryProducts[e].slug}`} className="">
-                <img alt="ecommerce" className="w-36 m-auto object-cover object-top  block" src={categoryProducts[e].img} />
+              <Link href={`/product/${categoryProducts[e].slug}`} className="block overflow-hidden">
+                <img alt="ecommerce" className="hover:scale-125 duration-300 overflow-hidden w-36 m-auto object-cover object-top  block" src={categoryProducts[e].img} />
               </Link>
               <div className="mt-4">
                 <h3 className="text-gray-500 text-3xl md:text-xs tracking-widest title-font mb-1">{categoryProducts[e].category}</h3>

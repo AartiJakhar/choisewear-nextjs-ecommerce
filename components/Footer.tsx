@@ -32,60 +32,36 @@ export default function Footer() {
             </li>
           </nav>
         </div>
+          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CUSTOMER SERVICE</h2>
+          <nav className="list-none mb-10">
+            <li>
+              <a className="text-gray-600 hover:text-gray-800">Contact Us</a>
+            </li>
+            <li>
+              <a className="text-gray-600 hover:text-gray-800">About Us</a>
+            </li>
+            <li>
+              <a className="text-gray-600 hover:text-gray-800">Return Policy</a>
+            </li>
+          </nav>
+        </div>
         <div className="lg:w-1/4 md:w-1/2 w-full px-4">
           <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">POLICY</h2>
           <nav className="list-none mb-10">
             <li>
-              <a className="text-gray-600 hover:text-gray-800">First Link</a>
+              <a className="text-gray-600 hover:text-gray-800">Privecy Policy</a>
             </li>
             <li>
-              <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+              <a className="text-gray-600 hover:text-gray-800">Terms and Conditions</a>
             </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-            </li>
+           
           </nav>
         </div>
-        <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">ABOUT</h2>
-          <nav className="list-none mb-10">
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">First Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-            </li>
-          </nav>
-        </div>
-        <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-          <nav className="list-none mb-10">
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">First Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-            </li>
-          </nav>
-        </div>
+      
       </div>
     </div>
-    <div className="bg-gray-100">
+    <div className="bg-gray-200">
       <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
         <p className="text-gray-500 text-sm text-center sm:text-left">© 2020  Choicewear.com  - All Rights Reserved
         
