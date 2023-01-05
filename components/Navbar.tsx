@@ -46,8 +46,8 @@ export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, c
         <div onMouseOver={() => { setUserdropdown(true) }} onMouseLeave={() => { setUserdropdown(false) }}>
 
           {user.value && userdropdown &&
-            <div className="absolute md:right-6  p-3 md:top-14 ">
-              <div className='bg-pink-500 rounded text-white px-4 py-2 shadow-lg  border-black border-y border-solid cursor-pointer '>
+            <div className="absolute md:right-0 top-40 lg:right-0 pt-4 xl:right-0  md:top-14 ">
+              <div className='bg-white rounded  pr-20 pl-4 py-2 shadow-lg     cursor-pointer '>
                 <ul>
                   <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'>Orders</li>
                   <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'>Profile</li>
