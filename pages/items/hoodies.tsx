@@ -6,18 +6,18 @@ export default function Hoodies({data}:any) {
   
   return (
     <section className="text-gray-600 body-font">
-    <div className="container px-5 py-24 mx-auto">
+    <div className="container px-5 py-20 mx-auto">
       <div className="flex flex-wrap justify-around -m-4">
         {/* {hoodies.length === 0 && <h1>soory not available now </h1>} */}
        {categoryProducts && Object.keys(categoryProducts).map((e:any)=>{
         return <div key={categoryProducts[e]._id} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-lg mx-4  ">
-          <Link href={`/product/${categoryProducts[e].slug}`}  className=" block h-[60%] relative  rounded overflow-hidden">
-            <img  alt="ecommerce" className="m-auto object-cover object-top  block" src={categoryProducts[e].img} />
+          <Link href={`/product/${categoryProducts[e].slug}`}  className=" ">
+            <img  alt="ecommerce" className="w-60 m-auto object-cover object-top  block" src={categoryProducts[e].img} />
           </Link>
           <div className="mt-4">
             <h3 className="text-gray-500 text-3xl md:text-xs tracking-widest title-font mb-1">{categoryProducts[e].category}</h3>
             <h2 className=" my-2 text-gray-900 title-font text-lg font-medium">{categoryProducts[e].title}</h2>
-            <h3>{categoryProducts[e].desc}</h3>
+            
             <div className='my-3'>
  {categoryProducts[e].size.map((e:string)=>{
                return <span key={e} className=' border-solid border-2 border-slate-300 mx-1 px-2'>{e }</span>

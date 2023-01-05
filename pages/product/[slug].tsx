@@ -52,11 +52,14 @@ export default function Post({ addToCart, data, buyNow ,nextauthUrl}: any) {
     window.location = url;
   }
   return (
-    <section className="text-gray-600 body-font overflow-hidden">
+    <section className="text-gray-600 body-font overflow-hidden px-10">
       <ToastContainer />
       <div className="container  py-14 mx-auto">
-        <div className="lg:w-5/5  mx-auto flex flex-wrap">
-          <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto  object-cover object-center rounded" src={product.img} />
+        <div className="  mx-auto flex flex-wrap justify-center " >
+          <div className="img w-1/2 flex items-center">
+          <img alt="ecommerce" className="mx-auto w-40 lg:w-60  lg:h-auto  object-cover object-center rounded" src={product.img} />
+
+          </div>
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest px-2">BRAND NAME</h2>
             <h1 className="text-gray-900 md:text-5xl text-3xl title-font font-medium mb-1">{product.title} ({product.size}/{product.color})</h1>
