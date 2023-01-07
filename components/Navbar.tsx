@@ -19,7 +19,7 @@ export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, c
     }
   }
   return (
-    <header className="text-gray-600 md:pb-0 pb-2 body-font shadow-xl sticky bg-white top-0 z-10">
+    <header className="text-gray-600 md:pb-0 pb-2 body-font shadow-md sticky bg-white top-0 z-10">
 
       <div className="container mx-auto flex flex-wrap  flex-col md:flex-row items-center">
         <Link href={"/"} className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
@@ -49,7 +49,7 @@ export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, c
             <div className="absolute md:right-0 top-40 lg:right-0 pt-4 xl:right-0  md:top-14 ">
               <div className='bg-white rounded  pr-20 pl-4 py-2 shadow-lg     cursor-pointer '>
                 <ul>
-                  <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'>Orders</li>
+                  <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'><Link href={"/orders/orders"}>Orders</Link> </li>
                   <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'>Profile</li>
                   <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black' onClick={logOut}>Log out</li>
                 </ul>

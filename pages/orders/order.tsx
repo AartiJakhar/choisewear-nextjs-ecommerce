@@ -1,6 +1,13 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+import { useRouter } from 'next/router'
 
-export default function order() {
+export default function Order() {
+  const router = useRouter()
+  useEffect(() => {
+      if(!localStorage.getItem('token')){
+     router.push('/')
+      }
+  }, [router])
   return (
     <section className="text-gray-600 body-font overflow-hidden">
     <div className="container px-5 py-24 mx-auto">
