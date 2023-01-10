@@ -57,7 +57,7 @@ export default function Post({ addToCart, data, buyNow ,nextauthUrl}: any) {
       <div className="container  py-14 mx-auto">
         <div className="  mx-auto flex flex-wrap justify-center " >
           <div className="img w-1/2 flex items-center">
-          <img alt="ecommerce" className="mx-auto w-40 lg:w-60  w-full lg:h-auto  object-cover object-center rounded" src={product.img} />
+          <img alt="ecommerce" className="mx-auto w-40 lg:w-60  lg:h-auto  object-cover object-center rounded" src={product.img} />
 
           </div>
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
