@@ -8,12 +8,13 @@ const handler=async(
   res: NextApiResponse
 ) =>{
     if(req.method=="POST"){
-
-        const token = req.headers["auth-token"];
-           const verify = jwt.verify(token, process.env.JWT_SECRET);
-        let user = verify.user.id;
-        let orders=await Order.find({user:user})
-        res.status(200).json({orders})
+      const token :any = req.headers["auth-token"];
+      if(token!==undefined ){
+        const verify:any = jwt.verify(token, process.env.JWT_SECRET!);
+         let user = verify.user.id;
+         let orders=await Order.find({user:user})
+         res.status(200).json({orders})
+      }
   
     }
 }
