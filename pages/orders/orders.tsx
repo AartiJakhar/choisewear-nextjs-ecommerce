@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
@@ -41,40 +42,34 @@ export default function Orders({ nextauthUrl }: any) {
               {myorders !== undefined && myorders.orders.length !== 0 && <table className="min-w-full">
                 <thead className="bg-white border-b">
                   <tr>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      quantity
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
+                      #Oreder Id
                     </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      name
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
+                      Email
                     </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      variant
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
+                      Amount
                     </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      size
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-center">
+                      Details
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {myorders.orders.filter((value: any) => { return value }).map((elements: any) => {
-                    return Object.values(elements.products).map((e: any) => {
-                      return <tr key={Math.random()} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{e.qty}</td>
+                  {myorders.orders.map((e: any) => {
+                    return    <tr key={e._id} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100" >
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{e.orderid}</td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {e.name}
+                          {e.email}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {e.variant}
+                          {e.amount}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {e.size}
+                         <Link href={`/orders/order?id=${e.orderid}`}>Details</Link>
                         </td>
                       </tr>
-                    })
-
-
-
-
                   })}
                 </tbody>
               </table>}

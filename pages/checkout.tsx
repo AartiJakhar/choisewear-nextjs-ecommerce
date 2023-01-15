@@ -5,7 +5,7 @@ import Script from 'next/script';
 import { useRouter } from 'next/router';
 // to define glodle variables to window with typescript 
 import '../types/index.ts'
-export default function Checkout({ addToCart, cart, setCart, saveCart, removeFromCart, clearCart, subtotal }: any) {
+export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, subtotal }: any) {
   const router = useRouter()
   const [Caseondelivery, setCaseondelivery] = useState(false)
   const [credentials, setCredentials] = useState({ name: "", email: "", address: "", phone: "", pincode: "" })
@@ -99,13 +99,13 @@ export default function Checkout({ addToCart, cart, setCart, saveCart, removeFro
       body: JSON.stringify(data),
     })
     let success = await responce.json()
-    console.log(success.success)
+ 
     if (success.success) {
-      router.push("/orders/orders")
+      setCredentials({ name: "", email: "", address: "", phone: "", pincode: "" })
+      // clearCart()
+      // router.push("/orders/orders")
     }
-    setCredentials({ name: "", email: "", address: "", phone: "", pincode: "" })
-    saveCart({})
-    setCart({})
+
   }
 
   return (
