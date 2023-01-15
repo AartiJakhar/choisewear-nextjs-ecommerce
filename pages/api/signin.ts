@@ -36,7 +36,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         res
           .status(400)
           .json({
-            error: "User with this email is not exist yet",
+            error: "A User with this email does not exist ",
             success: false,
           });
       }

@@ -113,6 +113,7 @@ saveCart({})
           progress: undefined,
           theme: "light",
           });
+          router.push('/')
  }
   return <>
    <Head>

@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Signup({nextauthUrl}:any) {
        const router=useRouter();
     const [credentials, setCredentials] = useState({name:"",email:"",password:""})
+    const [error, setError] = useState("")
     const onChangeCredentials=(e:any)=>{
           setCredentials({...credentials,[e.target.name]:e.target.value})
          
@@ -20,23 +21,28 @@ export default function Signup({nextauthUrl}:any) {
                 },
                 body: JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password})
               })
-              const userData= await data.json()
-                localStorage.setItem('token',userData.authtoken)
-                 setCredentials({name:"",email:"",password:""})
-          toast.success('🦄 You have Created Your account', {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-          localStorage.setItem('token',userData.authtoken)
-          setTimeout(() => {
-              router.push(`${nextauthUrl}`)
-          }, 2000);
+              const res= await data.json()
+              if(res.success){
+                  localStorage.setItem('token',res.authtoken)
+                  setCredentials({name:"",email:"",password:""})
+                  toast.success('🦄 You have Created Your account', {
+                  position: "top-right",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                  });
+                 setError("")
+                  setTimeout(() => {
+                      router.push(`${nextauthUrl}`)
+                  }, 2000);
+              }else{
+         setError(res.error)
+              }
+     
        
     }
         useEffect(() => {
@@ -62,11 +68,12 @@ export default function Signup({nextauthUrl}:any) {
                 <form className="space-y-4 md:space-y-6" action="#" onSubmit={signUp}>
                     <div>
                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-pink-900 dark:text-black">Your name</label>
-                        <input type="text" value={credentials.name}  required name="name" id="name" onChange={onChangeCredentials} className="bg-white-50 border border-gray-300 text-pink-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name" />
+                        <input type="text" value={credentials.name} minLength={4} required name="name" id="name" onChange={onChangeCredentials} className="bg-white-50 border border-gray-300 text-pink-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name" />
                     </div>
                     <div>
                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-pink-900 dark:text-black">Your email</label>
                         <input type="email" value={credentials.email}  name="email" id="email" required onChange={onChangeCredentials} className="bg-white-50 border border-gray-300 text-pink-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" />
+                        {error!=="" && <p className='text-red-700 px-1'>{error}</p>}
                     </div>
                     <div>
                         <label htmlFor="password" className="block mb-2 text-sm font-medium text-pink-900 dark:text-black">Password</label>

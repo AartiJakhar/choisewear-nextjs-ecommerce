@@ -21,8 +21,8 @@ export default function Login({nextauthUrl}:any) {
       })
       const userData=await data.json()
    if( !userData.success){
-   
-        toast.error('Invalid credentials', {
+      
+        toast.error(userData.error, {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
