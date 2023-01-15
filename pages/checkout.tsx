@@ -5,7 +5,7 @@ import Script from 'next/script';
 import { useRouter } from 'next/router';
 // to define glodle variables to window with typescript 
 import '../types/index.ts'
-export default function Checkout({ addToCart, cart, removeFromCart, clearCart, subtotal }: any) {
+export default function Checkout({ addToCart, cart,setCart,saveCart, removeFromCart, clearCart, subtotal }: any) {
   const router = useRouter()
   const [Caseondelivery, setCaseondelivery] = useState(false)
   const [credentials, setCredentials] = useState({ name: "", email: "", address: "", phone: "", pincode: "" })
@@ -84,7 +84,7 @@ export default function Checkout({ addToCart, cart, removeFromCart, clearCart, s
 
   // }
 
-  // to get order with case payment 
+  // to get order with case payment method
   const caseOnSubmit=async()=>{
     let oid = Math.floor(Math.random() * Date.now());
     let data = { cart, subtotal, oid, email: credentials.email,name:credentials.name,address:credentials.address,pincode:credentials.pincode,phone:credentials.phone };
@@ -104,16 +104,18 @@ export default function Checkout({ addToCart, cart, removeFromCart, clearCart, s
       router.push("/orders/orders")
     }
   setCredentials({ name: "", email: "", address: "", phone: "", pincode: "" })
+  saveCart({})
+    setCart({})
   }
 
   return (
     <div className='container m-auto'>
-
+{/* adding checkoutjs for paytm  */}
       <Script src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`} crossOrigin="anonymous"></Script>
-
       <Head>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
       </Head>
+{/**  adding checkoutjs for paytm **/}
       <h1 className='font-bold text-3xl my-8 text-center'>Checkouts</h1>
       <h2 className='font-bold text-xl my-4'>1. Delivery Details</h2>
       <div className='mx-auto'>

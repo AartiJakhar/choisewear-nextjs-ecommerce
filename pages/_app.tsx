@@ -128,6 +128,6 @@ saveCart({})
       />
    <Navbar key={key} user={user} logOut={logOut} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />
        <ToastContainer/>
-   <Component buyNow={buyNow} subtotal={subtotal} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} {...pageProps} />
+   <Component buyNow={buyNow} subtotal={subtotal} addToCart={addToCart} cart={cart} setCart={setCart} removeFromCart={removeFromCart} saveCart={saveCart} clearCart={clearCart} {...pageProps} />
    <Footer/></>
 }
