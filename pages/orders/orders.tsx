@@ -1,11 +1,33 @@
 import { useRouter } from 'next/router'
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 
-export default function Orders() {
+export default function Orders({nextauthUrl}:any) {
     const router = useRouter()
+    // store orders 
+    const [orders, setOrders] = useState<any>(undefined)
+
+    const myorders=async()=>{
+     const user =  localStorage.getItem('token')
+     console.log(user)
+      const res = await fetch(`${nextauthUrl}api/orders/orders`,{
+        method:"POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token":
+            localStorage.getItem('token') as any,
+        },
+                body: JSON.stringify({user})
+      })
+      const data = await res.json()
+      setOrders(data)
+      console.log(data)
+    }
     useEffect(() => {
+
         if(!localStorage.getItem('token')){
        router.push('/')
+        }else{
+          myorders()
         }
     }, [router])
   return (
@@ -16,63 +38,48 @@ export default function Orders() {
     <div className="flex flex-col mx-10">
     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-        <div className="overflow-hidden">
-          <table className="min-w-full">
+        <div className="overflow-hidden text-center">
+{ orders !==undefined && orders.orders.length !==0?   <table className="min-w-full">
             <thead className="bg-white border-b">
               <tr>
                 <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  #
+                  quantity
                 </th>
                 <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  First
+                 name
                 </th>
                 <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Last
+                 variant
                 </th>
                 <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Handle
+                  size
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+{  orders.orders.filter((value:any)=>{return value}).map((elements:any)=>{
+      return Object.values(elements.products).map((e:any)=>{
+          return  <tr key={Math.random()} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{e.qty}</td>
                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Mark
+                  {e.name}
                 </td>
                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Otto
+                  {e.variant}
                 </td>
                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  @mdo
-                </td>
-              </tr>
-              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Jacob
-                </td>
-                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Thornton
-                </td>
-                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  @fat
+                 {e.size}
                 </td>
               </tr>
-              <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Larry
-                </td>
-                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Wild
-                </td>
-                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  @twitter
-                </td>
-              </tr>
+        })
+        // return console.log(a) 
+
+             
+           
+      })}
             </tbody>
-          </table>
+          </table>:<div className='bg-slate-200 rounded  p-3 inline-block mx-auto '><h2 className='text-blue-900 text-bold'>No Results To Display</h2></div>}
+          
         </div>
       </div>
     </div>
@@ -81,14 +88,9 @@ export default function Orders() {
     </div>
   )
 }
-
 export async function getServerSideProps(context: any) {
-    // Fetch data from external data source
+
     let nextauthUrl =process.env.NEXTAUTH_URL
-    // const { slug } = context.params
-    const res = await fetch(`${nextauthUrl}api/orders/orders`)
-    const data = await res.json()
-   console.log(data)
-    // Pass data to the page via props
-    return { props: { data ,nextauthUrl} }
+
+    return { props: { nextauthUrl } }
   }
