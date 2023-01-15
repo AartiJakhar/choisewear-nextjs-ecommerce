@@ -30,59 +30,59 @@ export default function Checkout({ addToCart, cart, removeFromCart, clearCart, s
   }, [credentials])
 
   // to get payment through paytm 
-  const initiatePayment = async () => {
+  // const initiatePayment = async () => {
 
-    let oid = Math.floor(Math.random() * Date.now());
-    let dataa = { cart, subtotal, oid, email: credentials.email,name:credentials.name,address:credentials.address,pincode:credentials.pincode,phone:credentials.phone };
-    //get a transition token 
-    const data = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/paytm/pretransaction`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(dataa),
-    })
-    let txnRes = await data.json()
-    console.log(txnRes)
-    let txnToken = txnRes.txnToken
-    console.log(txnToken)
-    if (txnToken == undefined) {
-      setCaseondelivery(true)
-    }
-    //paytm process after getting txnToken 
-    let config: any = {
-      "root": "",
-      "flow": "DEFAULT",
-      "data": {
-        "orderId": oid, /* update order id */
-        "token": txnToken, /* update token value */
-        "tokenType": "TXN_TOKEN",
-        "amount": subtotal/* update amount */
-      },
-      "handler": {
-        "notifyMerchant": function (eventName: any, data: any) {
-          console.log("notifyMerchant handler function called");
-          console.log("eventName => ", eventName);
-          console.log("data => ", data);
-        }
-      }
-    };
-    // initialze configuration using init method
-
-
+  //   let oid = Math.floor(Math.random() * Date.now());
+  //   let dataa = { cart, subtotal, oid, email: credentials.email,name:credentials.name,address:credentials.address,pincode:credentials.pincode,phone:credentials.phone };
+  //   //get a transition token 
+  //   const data = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/paytm/pretransaction`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "application/json"
+  //     },
+  //     body: JSON.stringify(dataa),
+  //   })
+  //   let txnRes = await data.json()
+  //   console.log(txnRes)
+  //   let txnToken = txnRes.txnToken
+  //   console.log(txnToken)
+  //   if (txnToken == undefined) {
+  //     setCaseondelivery(true)
+  //   }
+  //   //paytm process after getting txnToken 
+  //   let config: any = {
+  //     "root": "",
+  //     "flow": "DEFAULT",
+  //     "data": {
+  //       "orderId": oid, /* update order id */
+  //       "token": txnToken, /* update token value */
+  //       "tokenType": "TXN_TOKEN",
+  //       "amount": subtotal/* update amount */
+  //     },
+  //     "handler": {
+  //       "notifyMerchant": function (eventName: any, data: any) {
+  //         console.log("notifyMerchant handler function called");
+  //         console.log("eventName => ", eventName);
+  //         console.log("data => ", data);
+  //       }
+  //     }
+  //   };
+  //   // initialze configuration using init method
 
 
 
 
-    // window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-    //   // after successfully updating configuration, invoke JS Checkout
-    //   console.log('init')
-    //   window.Paytm.CheckoutJS.invoke();
-    // }).catch(function onError(error: any) {
-    //   console.log("error => ", error);
-    // });
 
-  }
+
+  //   // window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+  //   //   // after successfully updating configuration, invoke JS Checkout
+  //   //   console.log('init')
+  //   //   window.Paytm.CheckoutJS.invoke();
+  //   // }).catch(function onError(error: any) {
+  //   //   console.log("error => ", error);
+  //   // });
+
+  // }
 
   // to get order with case payment 
   const caseOnSubmit=async()=>{
@@ -178,7 +178,7 @@ export default function Checkout({ addToCart, cart, removeFromCart, clearCart, s
         <h3>subtotal :{subtotal}</h3>
         <div className='flex justify-around'>
           <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart} disabled={Object.keys(cart).length === 0}>Clear Cart</button>
-          {Caseondelivery ? <button onClick={initiatePayment} className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' disabled={Object.keys(cart).length === 0} >Pay ₹ {subtotal} </button>
+          {Caseondelivery ? <button onClick={()=>console.log('first')} className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' disabled={Object.keys(cart).length === 0} >Pay ₹ {subtotal} </button>
 
             :Object.keys(cart).length !== 0 &&  <button className='disabled:bg-purple-800 flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={caseOnSubmit} disabled={!disable } >Case On Delivery ₹ {subtotal} </button>}
         </div>
