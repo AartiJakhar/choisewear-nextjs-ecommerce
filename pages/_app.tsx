@@ -48,14 +48,16 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
  setKey(Math.random())
  setUser({value : localStorage.getItem("token")})
  }, [router.query])
+ useEffect(()=>{
+  localStorage.setItem("subtotal",JSON.stringify(subtotal))
+ },[subtotal])
  
  const saveCart=(mycart:any)=>{
        localStorage.setItem("cart",JSON.stringify(mycart))
-       localStorage.setItem("subtotal",JSON.stringify(subtotal))
+      
        let subt:any=0;
        let keys= Object.keys(cart)
-       console.log(mycart)
-       console.log(mycart.length !=0)
+ 
       //  if(mycart[keys]){
        for (let i = 0; i <keys.length; i++) {
         if(mycart[keys[i]]){
@@ -65,8 +67,9 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
       //  }
       }
        setSubtotal(subt)
+       localStorage.setItem("subtotal",JSON.stringify(subtotal))
  }
-  const addToCart=(itemCode:number,qty:number,price:number,name:string,size:string,variant:string)=>{
+  const addToCart=(itemCode:string,qty:number,price:number,name:string,size:string,variant:string)=>{
   
      const newCart:any=cart;
      if(itemCode in cart){
@@ -80,11 +83,15 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
   const clearCart=()=>{ 
 saveCart({})
     setCart({})
+    setSubtotal(0)
   }
-  const buyNow=async(itemCode:number,qty:number,price:number,name:string,size:string,variant:string)=>{
-    let newCart={ itemCode:{qty:1,price,name,size,variant}}
+  const buyNow=async(itemCode:string,qty:number,price:number,name:string,size:string,variant:string)=>{
+  
+    let newCart :any= {}
+    newCart[itemCode]= {qty:1,price,name,size,variant}
     setCart(newCart)
-    saveCart(newCart)
+    saveCart(newCart) 
+    setSubtotal(price)
     router.push('/checkout')
   }
   const removeFromCart=(itemCode:number,qty:number,price:number,name:string,size:string,variant:string)=>{
@@ -93,7 +100,7 @@ saveCart({})
     if(itemCode in cart){
          newCart[itemCode].qty=newCart[itemCode].qty-qty
     }
-    console.log(newCart[itemCode])
+
     if(newCart[itemCode].qty<=0){
       delete newCart[itemCode]
     }
