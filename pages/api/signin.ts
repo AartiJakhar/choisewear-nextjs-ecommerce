@@ -29,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             id: user.id,
           },
         };
-        const authtoken =  jwt.sign(data, process.env.JWT_SECRET!,{expiresIn:"2d"});
+        const authtoken =  jwt.sign(data, process.env.JWT_SECRET!);
 
         res.status(200).json({authtoken,success:true});
      } } else {

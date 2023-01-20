@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
 const [cart, setCart] = useState({})
 const [key, setKey]  = useState(0)
 const [user, setUser] = useState<object>({value:null})
-const [subtotal, setSubtotal] = useState(0)
+const [subtotal, setSubtotal] = useState<any>(null)
 const [progress, setProgress] = useState(0)
   // Inject types that this component accepts
 const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
@@ -48,8 +48,12 @@ const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
  setKey(Math.random())
  setUser({value : localStorage.getItem("token")})
  }, [router.query])
+
  useEffect(()=>{
-  localStorage.setItem("subtotal",JSON.stringify(subtotal))
+  if(subtotal!==null){
+
+    localStorage.setItem("subtotal",JSON.stringify(subtotal))
+  }
  },[subtotal])
  
  const saveCart=(mycart:any)=>{

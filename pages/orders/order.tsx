@@ -23,7 +23,7 @@ export default function Myorder({order}:any) {
           <div className="flex mb-4">
           <a className="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">item Description</a>
         <a className="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Quantity</a>
-          <a className="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Item Total</a>
+          <a className="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Item Price</a>
         </div>
  {order&& order[0].products && Object.values(order[0].products).map((e:any)=>{
   return  <div key={Math.random()} className="flex border-t border-gray-200 py-2">

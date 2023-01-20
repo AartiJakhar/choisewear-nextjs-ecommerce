@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import connectDb from '../../../midleware/mongoose'
 import Order from '../../../modals/Order'
 import jwt from 'jsonwebtoken'
-import jsonwebtoken from 'jsonwebtoken'
 const handler=async(
   req: NextApiRequest,
   res: NextApiResponse

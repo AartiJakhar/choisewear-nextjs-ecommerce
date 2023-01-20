@@ -14,7 +14,7 @@ export default function Post({ addToCart, data, buyNow ,nextauthUrl}: any) {
   const toogleClick = async () => {
     const pins = await fetch(` ${nextauthUrl}api/pincode`)
     const pinJson = await pins.json()
-    if (pinJson.arr.includes(parseInt(pincode))) {
+    if (Object.keys(pinJson.pincodes).includes(pincode)) {
       setcheckpin(true)
       toast.success('🦄 Wow  Pincode is serviceable', {
         position: "top-right",
@@ -69,11 +69,11 @@ export default function Post({ addToCart, data, buyNow ,nextauthUrl}: any) {
               <div className="flex align-middle items-center my-3">
                 <span className="mr-3 text-4xl">Color</span>
                 {Object.keys(variants).map((e) => {
-                  return (<button onClick={() => { refreshVariant(Object.keys(variants[e])[0], e) }} key={e} className={`border-2  ${color === e ? `border-gray-500 shadow-lg w-11 h-11` : 'border-gray-300'} ml-1 bg-${e === "black" ? "neutral" : e}-500 rounded-full bg w-8 h-8 focus:outline-none`}
+                  return (<button onClick={() => { refreshVariant(Object.keys(variants[e])[0], e) }} key={e} className={`border-2  ${color === e ? `border-gray-500 shadow-lg w-[2.4rem] h-[2.4rem]` : 'border-gray-300'} ml-1 bg-${e === "black" ? "neutral" : e}-500 rounded-full bg w-8 h-8 focus:outline-none`}
                     style={{ background: `${e === 'black' && "black" || e === 'green' && "green" || e === 'yellow' && "yellow" || e === 'red' && "red"}` }}
                   ></button>)
                 })}
-                {/* <button className="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button> */}
+
 
               </div>
               <div className="flex ml-6 items-center">
@@ -92,12 +92,13 @@ export default function Post({ addToCart, data, buyNow ,nextauthUrl}: any) {
                 </div>
               </div>
             </div>
+{/* adding only  this to localStorage(cart)  */}
             <div className="flex ">
               <div className='flex w-[11rem]'>
                 <span className="title-font font-medium text-2xl text-gray-900">₹ {product.price}</span>
                 <button onClick={() => { buyNow(product.slug, 1, product.price, product.title, product.size, product.color) }} className="flex ml-auto text-white bg-pink-500 border-0 py-2 px-3 focus:outline-none hover:bg-pink-600 rounded">Buy Now</button>
               </div>
-
+ {/* adding cart     */}
               <button className="flex ml-auto text-white bg-pink-500 border-0 py-2 px-3 focus:outline-none hover:bg-pink-600 rounded" onClick={() => { addToCart(product.slug, 1, product.price, product.title, product.size, product.color) }}>Add to Cart</button>
               <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                 <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
@@ -105,6 +106,8 @@ export default function Post({ addToCart, data, buyNow ,nextauthUrl}: any) {
                 </svg>
               </button>
             </div>
+            
+{/* checking picodes service  */}
             <div className=' pin mt-20 mr-14 flex space-x-2 justify-between text-sm'>
               <input type="text" name="pincode" placeholder='341516' id="pincode" className='px-2 py-2 border-2
         border-pink-500 outline-0 rounded-md' onChange={toogleChange} />

@@ -2,30 +2,46 @@ import React, { useState, useEffect } from 'react'
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 import Head from 'next/head';
 import Script from 'next/script';
-import { useRouter } from 'next/router';
-// to define glodle variables to window with typescript 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// to define globle variables to window with typescript 
 import '../types/index.ts'
 export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, subtotal }: any) {
-  const router = useRouter()
   const [Caseondelivery, setCaseondelivery] = useState(false)
   const [credentials, setCredentials] = useState({ name: "", email: "", address: "", phone: "", pincode: "" })
+  const [state, setState] = useState("")
+  const [city, setCity] = useState("")
   const [disable, setDisable] = useState(false)
+  
+  //onchange function for form
   const changeCredentials = (e: any) => {
-
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
-  // to get real states or credential to update button disabled or not 
-  useEffect(() => {
-    if (credentials.name.length > 3 && credentials.phone.length > 9 && credentials.email.length > 3 && credentials.address.length > 3 && credentials.pincode.length > 3) {
-      setDisable(true)
+  //fill state or city values automaticlly with the help of pincode(available for service only )
+  const autoValuePlacer=async()=>{
+    const pins = await fetch(` ${process.env.NEXT_PUBLIC_HOST}api/pincode`)
+      const pinJson = await pins.json()
+      if(    Object.keys(pinJson.pincodes).includes(credentials.pincode)){
+        setState(pinJson.pincodes[credentials.pincode][1])
+        setCity(pinJson.pincodes[credentials.pincode][0])
 
+      }else{
+        setState("")
+        setCity("")
+      }
+  
+  }
+// to get real states or credential to update button disabled or not 
+  useEffect(() => {
+    if (credentials.name.length > 3 && credentials.phone.length > 9 && credentials.email.length > 3 && credentials.address.length > 3 && credentials.pincode.length > 5) {
+      setDisable(true)
+      autoValuePlacer()
     }
     else {
       setDisable(false)
-
+      setState("")
+      setCity("")
     }
-
-
 
   }, [credentials])
 
@@ -88,7 +104,6 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
   const caseOnSubmit = async () => {
     let oid = Math.floor(Math.random() * Date.now());
     let data = { cart, subtotal, oid, email: credentials.email, name: credentials.name, address: credentials.address, pincode: credentials.pincode, phone: credentials.phone };
-    //get a transition token 
     const responce = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/orders/preorder`, {
       method: "POST",
       headers: {
@@ -98,12 +113,35 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
       },
       body: JSON.stringify(data),
     })
-    let success = await responce.json()
- 
-    if (success.success) {
+    let json = await responce.json()
+
+    //checking json resoponse 
+    if (json.success) {
+
       setCredentials({ name: "", email: "", address: "", phone: "", pincode: "" })
-      // clearCart()
+      toast.success(`🦄 Your orders have been successfully placed `, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      clearCart()
       // router.push("/orders/orders")
+    }else{
+      toast.error(`🦄 ${json.error}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
 
   }
@@ -147,12 +185,12 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
 
           <div className="px-4 w md:w-3/4 sm:w-full lg:w-3/4  flex justify-between ">
             <div className=" w-[32vh] md:w-[42vh] mb-4">
-              <label htmlFor="city" className="leading-7 text-sm text-gray-600">City</label>
-              <input type="text" id="city" name="city" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+              <label htmlFor="city"  className="leading-7 text-sm text-gray-600">City</label>
+              <input type="text" required id="city" name="city" value={city}  readOnly className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
             </div>
             <div className="w-[32vh] md:w-[42vh] mb-4">
               <label htmlFor="state" className="leading-7 text-sm text-gray-600">State</label>
-              <input type="text" id="state" name="state" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+              <input type="text" required id="state" name="state" readOnly value={state} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
             </div>
           </div>
         </form>

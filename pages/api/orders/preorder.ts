@@ -2,14 +2,34 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "../../../midleware/mongoose";
 import Order from "../../../modals/Order";
 import jwt from 'jsonwebtoken'
+import Product from "../../../modals/Product";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method == "POST") {
-    //initial order
-    // const token =await req.header("auth-token");
+    //initializing  order
     const token:any = req.headers["auth-token"];
- console.log(token)
-    // req.headers['headerName']
     if(token!==undefined ){
+      //check if card is tempered with - 
+      let cart = req.body.cart
+      let sumtotal=0
+      for (const item in cart) {
+        if (Object.prototype.hasOwnProperty.call(cart, item)) {
+          let products =await Product.findOne({slug:item})
+           sumtotal += cart[item].price*cart[item].qty
+
+           //checking cart price
+          if(products.price!==cart[item].price){
+              res.status(500).json({success:false,"error":"The Price of some items in your cart have changed "})
+              return
+          }
+          
+        }
+      }
+      //checking cart subtotal that should be (with the price of cart or qty)
+     if(sumtotal!==req.body.subtotal){
+     res.status(500).json({success:false,"error":"The Price of some items in your cart have changed "})
+     return
+     }
+      //fetching user id thorough jwt token to store products with that userid 
     const verify:any = jwt.verify(token, process.env.JWT_SECRET!);
     let user = verify.user.id;
     let data = req.body;
@@ -23,9 +43,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
     await order.save()
  
-    res.status(200).json({success:true} );
+    res.status(200).json({success:true,error:""} );
     }
-    // res.redirect(200,"/orders/orders")
   }
 };
 export default connectDb(handler);

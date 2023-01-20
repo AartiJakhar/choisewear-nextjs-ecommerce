@@ -2,13 +2,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
- arr:number[]
+pincodes:object,
 }
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-    const arr=[234400,721302, 110003,560017,341516]
-res.status(200).json({arr})
+    let pincodes={
+      "341516":["Kuchaman","Nagaur"],
+      "110003":["Delhi","Delhi"],
+      "560017":["Bangalore","West Bengal"],
+    }
+res.status(200).json({pincodes})
 }
