@@ -28,14 +28,27 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
       }else{
         setState("")
         setCity("")
+        toast.error(`🦄 Your pincode is currently now available please try later  `, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
   
   }
 // to get real states or credential to update button disabled or not 
   useEffect(() => {
-    if (credentials.name.length > 3 && credentials.phone.length > 9 && credentials.email.length > 3 && credentials.address.length > 3 && credentials.pincode.length > 5) {
-      setDisable(true)
+    if (credentials.name.length > 3 && credentials.phone.length > 9 && credentials.email.length > 3 && credentials.address.length > 3 && credentials.pincode.length ==6) {
       autoValuePlacer()
+      if(city.length>3&& state.length>3){
+
+        setDisable(true)
+      }
     }
     else {
       setDisable(false)
@@ -43,7 +56,7 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
       setCity("")
     }
 
-  }, [credentials])
+  }, [credentials,city,state])
 
   // to get payment through paytm 
   // const initiatePayment = async () => {
@@ -220,7 +233,7 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
           <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart} disabled={Object.keys(cart).length === 0}>Clear Cart</button>
           {Caseondelivery ? <button onClick={() => console.log('first')} className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' disabled={Object.keys(cart).length === 0} >Pay ₹ {subtotal} </button>
 
-            : Object.keys(cart).length !== 0 && <button className='disabled:bg-purple-800 flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={caseOnSubmit} disabled={!disable} >Case On Delivery ₹ {subtotal} </button>}
+            : Object.keys(cart).length !== 0 && <button className='disabled:bg-pink-300 flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={caseOnSubmit} disabled={!disable} >Case On Delivery ₹ {subtotal} </button>}
         </div>
       </div>
     </div>
