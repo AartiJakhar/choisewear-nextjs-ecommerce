@@ -66,7 +66,7 @@ export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, c
           {Object.keys(cart).length !== 0 && Object.keys(cart).map((item: any) => {
             return <li key={item}>
               <div className="item flex my-5">
-                <div className="w-2/3 font-semibold ">Tshirts - {cart[item].name} ({cart[item].variant}/{cart[item].size})</div>
+                <div className="w-2/3 font-semibold "> {cart[item].name} ({cart[item].variant}/{cart[item].size})</div>
                 <div className="flex font-semibold items-center justify-center w-1/3 text-lg ">
                   <AiFillMinusCircle onClick={() => { removeFromCart(item, 1, cart[item].price, cart[item].name, cart[item].size, cart[item].variant) }} className='cursor-pointer text-pink-500' />
                   <span className='mx-2'>{cart[item].qty}</span>
