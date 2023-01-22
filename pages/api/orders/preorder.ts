@@ -13,9 +13,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       let sumtotal=0
       for (const item in cart) {
         if (Object.prototype.hasOwnProperty.call(cart, item)) {
+
           let products =await Product.findOne({slug:item})
            sumtotal += cart[item].price*cart[item].qty
-
+           //checking if qty exist
+           if(products.availableQty<cart[item].qty){
+            res.status(500).json({success:false,"error":"Sorry Some of products in cart is out of stock"})
+            return
+           }
            //checking cart price
           if(products.price!==cart[item].price){
               res.status(500).json({success:false,"error":"The Price of some items in your cart have changed "})
@@ -29,6 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
      res.status(500).json({success:false,"error":"The Price of some items in your cart have changed "})
      return
      }
+
       //fetching user id thorough jwt token to store products with that userid 
     const verify:any = jwt.verify(token, process.env.JWT_SECRET!);
     let user = verify.user.id;
@@ -42,7 +48,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       products:data.cart
     });
     await order.save()
- 
+  for (const slug in cart) {
+    if (Object.prototype.hasOwnProperty.call(cart, slug)) {
+     await Product.findOneAndUpdate({slug:slug},{$inc:{"availableQty":-cart[slug].qty}})
+     console.log('yeah updated successfully')
+      
+    }
+  }
     res.status(200).json({success:true,error:""} );
     }
   }
