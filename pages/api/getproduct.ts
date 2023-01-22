@@ -10,9 +10,13 @@ const handler = async(
   res: NextApiResponse<Data>
 )=> {
     let products =await Product.find({ category:req.query.category})
+
     let categoryProducts:any={};
       for(let item of products){
-        if(item.title in categoryProducts){
+        console.log(item.availableQty)
+        if(item.availableQty!=0){
+        if(item.title in categoryProducts ){
+
             if(!categoryProducts[item.title].color.includes(item.color)&& item.availableQty>0){
               categoryProducts[item.title].color.push(item.color)
             }
@@ -26,7 +30,7 @@ const handler = async(
             categoryProducts[item.title].color=[item.color]
             categoryProducts[item.title].size=[item.size]
           }
-        }
+        }}
       }
   res.status(200).json({categoryProducts})
 }

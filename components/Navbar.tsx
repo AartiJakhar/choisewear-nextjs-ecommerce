@@ -1,25 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { AiOutlineShoppingCart, AiFillCloseCircle, AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 import { BsFillBagCheckFill } from "react-icons/bs"
 import { FaUserAlt } from "react-icons/fa"
-export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, clearCart }: any) {
+export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, clearCart }: any) {
   const ref: any = useRef()
   const [userdropdown, setUserdropdown] = useState(false)
-
+  const [sidebarToggler, setSidebarToggler] = useState(true)
   const toggleCart = () => {
-    if (ref.current.classList.contains('translate-x-full')) {
-      ref.current.classList.remove('translate-x-full')
-      ref.current.classList.add('translate-x-0')
-    }
-    else if (!ref.current.classList.contains('translate-x-full')) {
-      ref.current.classList.add('translate-x-full')
-      ref.current.classList.remove('translate-x-0')
-    }
+    setSidebarToggler(!sidebarToggler)
   }
   return (
-    <header className="text-gray-600 md:pb-0 pb-2 body-font shadow-md sticky bg-white top-0 z-10">
+    <header className="text-gray-600 md:pb-0 pb-2 body-font shadow-md  bg-white top-0 z-10 sticky left-0 right-0">
 
       <div className="container mx-auto flex flex-wrap  flex-col md:flex-row items-center">
         <Link href={"/"} className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
@@ -37,7 +30,7 @@ export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, c
           <button className=" mx-3 inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none  rounded text-base mt-4 md:mt-0 hover:bg-gray-300 hover:text-black" onClick={toggleCart}>Cart<AiOutlineShoppingCart />
 
           </button>
-          {user.value!==null && user.value!='undefined'? <button onMouseOver={() => { setUserdropdown(true) }} onMouseLeave={() => { setUserdropdown(false) }} className=" inline-flex items-center bg-gray-200 border-0 py-2 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0"> <FaUserAlt />
+          {user.value !== null && user.value != 'undefined' ? <button onMouseOver={() => { setUserdropdown(true) }} onMouseLeave={() => { setUserdropdown(false) }} className=" inline-flex items-center bg-gray-200 border-0 py-2 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0"> <FaUserAlt />
           </button> :
             <Link href={"/login"}>
               <button className='bg-gray-200  py-1 px-3 rounded focus:outline-none hover:bg-gray-300 hover:text-black'>Singin</button> </Link>}
@@ -57,7 +50,7 @@ export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, c
 
         </div>
       </div>
-      <div ref={ref} className={`sidecart h-[100vh]  overflow-auto absolute right-0 top-0 bg-pink-100 p-10 transition-transform ${Object.keys(cart).length === 0 ? "translate-x-full" : "translate-x-0"}`}>
+      <div ref={ref} className={`sidecart h-[100vh]  overflow-auto absolute right-0 top-0 bg-pink-100 p-10 transition-transform ${sidebarToggler ? "translate-x-full" : "translate-x-0"}`}>
         <h2 className='font-bold text-xl  text-center'>Shoping Cart</h2>
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl  "><AiFillCloseCircle /></span>
 
@@ -78,8 +71,8 @@ export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, c
           }
         </ol>
         <div className='flex align-middle justify-between mt-3  flex-wrap  '>
-          <Link href={"/checkout"}> <button disabled={Object.keys(cart).length==0} className='flex my-3 text-white disabled:bg-pink-200 bg-pink-500 border-0 py-2 px-1 focus:outline-none hover:bg-pink-500 rounded text-sm'> <BsFillBagCheckFill className='m-1' /> Check Out</button></Link>
-          <button disabled={Object.keys(cart).length==0} className='my-3 mx-2  text-white disabled:bg-pink-200 bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart}>Clear Cart</button>
+          <Link href={"/checkout"}> <button disabled={Object.keys(cart).length == 0} className='flex my-3 text-white disabled:bg-pink-200 bg-pink-500 border-0 py-2 px-1 focus:outline-none hover:bg-pink-500 rounded text-sm'> <BsFillBagCheckFill className='m-1' /> Check Out</button></Link>
+          <button disabled={Object.keys(cart).length == 0} className='my-3 mx-2  text-white disabled:bg-pink-200 bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart}>Clear Cart</button>
         </div>
 
       </div>
