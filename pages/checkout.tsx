@@ -187,7 +187,7 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
           <div className="px-4  md:w-3/4 sm:w-full lg:w-3/4  flex justify-between ">
             <div className="w-[32vh] md:w-[42vh]mb-4">
               <label htmlFor="phone" className="leading-7 text-sm text-gray-600">Phone</label>
-              <input type="text" required value={credentials.phone} onChange={changeCredentials} id="phone" name="phone" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+              <input type="number" placeholder='10-digit number' required value={credentials.phone} onChange={changeCredentials} id="phone" name="phone" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
             </div>
             <div className=" w-[32vh] md:w-[42vh] mb-4">
 
@@ -198,7 +198,7 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
 
           <div className="px-4 w md:w-3/4 sm:w-full lg:w-3/4  flex justify-between ">
             <div className=" w-[32vh] md:w-[42vh] mb-4">
-              <label htmlFor="city"  className="leading-7 text-sm text-gray-600">City</label>
+              <label htmlFor="city"  className="leading-7 text-sm text-gray-600">District</label>
               <input type="text" required id="city" name="city" value={city}  readOnly className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
             </div>
             <div className="w-[32vh] md:w-[42vh] mb-4">
@@ -230,7 +230,7 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
 
         <h3>subtotal :{subtotal}</h3>
         <div className='flex justify-around'>
-          <button className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart} disabled={Object.keys(cart).length === 0}>Clear Cart</button>
+          <button  className='flex mt-16 text-white disabled:bg-pink-300 bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart} disabled={Object.keys(cart).length === 0}>Clear Cart</button>
           {Caseondelivery ? <button onClick={() => console.log('first')} className='flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' disabled={Object.keys(cart).length === 0} >Pay ₹ {subtotal} </button>
 
             : Object.keys(cart).length !== 0 && <button className='disabled:bg-pink-300 flex mt-16 text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={caseOnSubmit} disabled={!disable} >Case On Delivery ₹ {subtotal} </button>}

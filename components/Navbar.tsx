@@ -78,8 +78,8 @@ export default function Navbar({ logOut,user, addToCart, cart, removeFromCart, c
           }
         </ol>
         <div className='flex align-middle justify-between mt-3  flex-wrap  '>
-          <Link href={"/checkout"}> <button className='flex my-3 text-white bg-pink-500 border-0 py-2 px-1 focus:outline-none hover:bg-pink-500 rounded text-sm'> <BsFillBagCheckFill className='m-1' /> Check Out</button></Link>
-          <button className='my-3 mx-2  text-white bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart}>Clear Cart</button>
+          <Link href={"/checkout"}> <button disabled={Object.keys(cart).length==0} className='flex my-3 text-white disabled:bg-pink-200 bg-pink-500 border-0 py-2 px-1 focus:outline-none hover:bg-pink-500 rounded text-sm'> <BsFillBagCheckFill className='m-1' /> Check Out</button></Link>
+          <button disabled={Object.keys(cart).length==0} className='my-3 mx-2  text-white disabled:bg-pink-200 bg-pink-500 border-0 py-2 px-4 focus:outline-none hover:bg-pink-500 rounded text-sm' onClick={clearCart}>Clear Cart</button>
         </div>
 
       </div>
