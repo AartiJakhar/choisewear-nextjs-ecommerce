@@ -1,11 +1,13 @@
 import React, { useState ,useEffect} from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
+import Error from 'next/error'
 export default function Post({ addToCart, data, buyNow ,nextauthUrl,loading}: any) {
-
+  const router = useRouter()
   const [pincode, setPincode] = useState("")
   const [checkpin, setcheckpin]: any = useState()
-  const { product, variants } = data
+  const { product, variants,error } = data
   // color or size states
   const [size, setSize] = useState(product.size)
   const [color, setColor] = useState(product.color)
@@ -49,12 +51,16 @@ export default function Post({ addToCart, data, buyNow ,nextauthUrl,loading}: an
   const refreshVariant = (newSize: any, newColor: string) => {
 
     let url: any = `${nextauthUrl}product/${variants[newColor][newSize]['slug']}`
-    window.location = url;
+    router.push(url)
   }
-  useEffect(() => {
- console.log(loading)
-  }, [loading])
-  
+  useEffect(()=>{
+    setSize(product.size)
+    setColor(product.color)
+  },[product])
+//for unknown slug
+if(error){
+  return <Error statusCode={404} />
+}
   return (
     <section className="text-gray-600 body-font overflow-hidden px-10">
       <ToastContainer />
@@ -77,8 +83,6 @@ export default function Post({ addToCart, data, buyNow ,nextauthUrl,loading}: an
                     style={{ background: `${e === 'black' && "black" || e === 'green' && "green" || e === 'yellow' && "yellow" || e === 'red' && "red"}` }}
                   ></button>)
                 })}
-
-
               </div>
               <div className="flex ml-6 items-center">
                 <span className="mr-3 md:text-3xl">Size</span>
@@ -96,14 +100,15 @@ export default function Post({ addToCart, data, buyNow ,nextauthUrl,loading}: an
                 </div>
               </div>
             </div>
+{product.availableQty<=0 &&    <p className="md:text-3xl my-3 md:my-8 leading-relaxed">Out Of Stock</p>}
 {/* adding only  this to localStorage(cart)  */}
             <div className="flex ">
               <div className='flex w-[11rem]'>
                 <span className="title-font font-medium text-2xl text-gray-900">₹ {product.price}</span>
-                <button onClick={() => { buyNow(product.slug, 1, product.price, product.title, product.size, product.color) }} className="flex ml-auto text-white bg-pink-500 border-0 py-2 px-3 focus:outline-none hover:bg-pink-600 rounded">Buy Now</button>
+                <button disabled={product.availableQty<=0} onClick={() => { buyNow(product.slug, 1, product.price, product.title, product.size, product.color) }} className="flex ml-auto text-white disabled:bg-pink-300 bg-pink-500 border-0 py-2 px-3 focus:outline-none hover:bg-pink-600 rounded">Buy Now</button>
               </div>
  {/* adding cart     */}
-              <button className="flex ml-auto text-white bg-pink-500 border-0 py-2 px-3 focus:outline-none hover:bg-pink-600 rounded" onClick={() => { addToCart(product.slug, 1, product.price, product.title, product.size, product.color) }}>{loading?"loading":'Add to Cart'}</button>
+              <button disabled={product.availableQty<=0} className="flex ml-auto text-white disabled:bg-pink-300 bg-pink-500 border-0 py-2 px-3 focus:outline-none hover:bg-pink-600 rounded" onClick={() => { addToCart(product.slug, 1, product.price, product.title, product.size, product.color) }}>{loading?"loading":'Add to Cart'}</button>
               <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                 <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>

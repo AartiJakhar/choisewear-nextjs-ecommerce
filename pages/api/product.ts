@@ -10,9 +10,11 @@ const handler = async(
   res: NextApiResponse<Data>
 )=> {
     let product =await Product.findOne({ slug:req.query.slug})
+    if(!product){
+      res.status(200).json({product:"",variants:"",error:"Product not found with this slug"})
+    }else{
     let variants =await Product.find({ title:product.title,category:product.category})
     let colorSizeSlug:any={}
-
       for(let item of variants){
             if(Object.keys(colorSizeSlug).includes(item.color)){
                 colorSizeSlug[item.color][item.size]={slug:item.slug}
@@ -22,7 +24,7 @@ const handler = async(
             colorSizeSlug[item.color][item.size]={slug:item.slug}
        }
       }
-  res.status(200).json({product:product,variants:colorSizeSlug})
+  res.status(200).json({product:product,variants:colorSizeSlug,error:""})}
 }
 
 export default connectDb(handler)
