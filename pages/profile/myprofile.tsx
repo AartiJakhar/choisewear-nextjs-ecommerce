@@ -75,6 +75,29 @@ export default function Myprofile() {
       body: JSON.stringify({ name: credentials.name, phone: credentials.phone, pincode: credentials.pincode, address: credentials.address })
     })
     const response = await data.json()
+   if(response.success) {
+    toast.success('🦄 You have Changed Your Details successfully', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+   }else{
+    toast.error(response.error + " please login again", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+   }
     console.log(response)
   }
 

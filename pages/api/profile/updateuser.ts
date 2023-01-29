@@ -10,7 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const {address,phone,pincode,name}=req.body
     if (token !== undefined && email!==undefined) {
       let user = await User.findOneAndUpdate({ email: email },{address:address,phone:phone,pincode:pincode,name:name})
-      res.status(200).json({user,success:true})
+      res.status(200).json({user,success:true,error:""})
       
     }else{
         res.status(200).json({success:false,error:"token or email is undefined"})
