@@ -31,7 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         };
         const authtoken =  jwt.sign(data, process.env.JWT_SECRET!);
 
-        res.status(200).json({authtoken,success:true});
+        res.status(200).json({authtoken,success:true,email});
      } } else {
         res
           .status(400)

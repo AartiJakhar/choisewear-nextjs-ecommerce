@@ -53,6 +53,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       email: data.email,
       orderid: data.oid,
       address: data.address,
+      phone: data.phone,
+      city: data.city,
+      pincode: data.pincode,
       amount: data.subtotal,
       products:data.cart
     });

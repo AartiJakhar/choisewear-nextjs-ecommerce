@@ -23,6 +23,18 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  city: {
+    type: String,
+    required: true,
+  },
+  pincode: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
   amount:{type:Number,required:true},
   status:{type:String,default:'Initiated',required:true},
   deliveryStatus:{type:String,default:'unShipped',required:true}

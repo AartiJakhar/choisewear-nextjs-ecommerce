@@ -13,7 +13,22 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     require: true,
-  }
+  },
+  address: {
+    type: String,
+    require: true,
+    default:''
+  },
+  pincode: {
+    type: String,
+    require: true,
+    default:''
+  },
+  phone: {
+    type: String,
+    require: true,
+    default:''
+  },
 },{timestamps:true});
 // mongoose.models={}
 export default mongoose.models.User || mongoose.model("User",UserSchema)

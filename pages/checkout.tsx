@@ -116,7 +116,7 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
   // to get order with case payment method
   const caseOnSubmit = async () => {
     let oid = Math.floor(Math.random() * Date.now());
-    let data = { cart, subtotal, oid, email: credentials.email, name: credentials.name, address: credentials.address, pincode: credentials.pincode, phone: credentials.phone };
+    let data = { cart, subtotal, oid, email: credentials.email, name: credentials.name, address: credentials.address, pincode: credentials.pincode, phone: credentials.phone,city:city };
     const responce = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/orders/preorder`, {
       method: "POST",
       headers: {

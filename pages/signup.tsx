@@ -24,6 +24,7 @@ export default function Signup({nextauthUrl}:any) {
               const res= await data.json()
               if(res.success){
                   localStorage.setItem('token',res.authtoken)
+                  localStorage.setItem('email',res.email)
                   setCredentials({name:"",email:"",password:""})
                   toast.success('🦄 You have Created Your account', {
                   position: "top-right",

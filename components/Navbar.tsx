@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { AiOutlineShoppingCart, AiFillCloseCircle, AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 import { BsFillBagCheckFill } from "react-icons/bs"
 import { FaUserAlt } from "react-icons/fa"
@@ -43,7 +43,7 @@ export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, 
               <div className='bg-white rounded  pr-20 pl-4 py-2 shadow-lg     cursor-pointer '>
                 <ul>
                   <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'><Link href={"/orders/orders"}>Orders</Link> </li>
-                  <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'>Profile</li>
+                  <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'><Link href={"/profile/myprofile"}>Profile</Link></li>
                   <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black' onClick={logOut}>Log out</li>
                 </ul>
               </div> </div>}

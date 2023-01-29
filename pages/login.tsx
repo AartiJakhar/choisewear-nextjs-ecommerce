@@ -34,6 +34,7 @@ export default function Login({nextauthUrl}:any) {
             });
         }else{
         localStorage.setItem('token',userData.authtoken)
+        localStorage.setItem('email',userData.email)
             setTimeout(() => {
                 router.push(`${nextauthUrl}`)
             }, 2000);
