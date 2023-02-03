@@ -32,7 +32,7 @@ export default function Myprofile() {
         progress: undefined,
         theme: "light",
       });
-      setCredentials({ password: "", newpassword: "", cpassword: "" })
+      setCredentials({...credentials, password: "", newpassword: "", cpassword: "" })
     } else {
       toast.error(`${error}`, {
         position: "top-right",
