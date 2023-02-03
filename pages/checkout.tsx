@@ -41,6 +41,20 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
       }
   
   }
+  const getUser = async () => {
+    let data = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/profile/getuser`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem('token') as any,
+        "email": localStorage.getItem('email') as any,
+      }
+    })
+    const response = await data.json()
+    if (response.success) {
+      setCredentials({...credentials, name: response.user.name, email: response.user.email, address: response.user.address, phone: response.user.phone, pincode: response.user.pincode })
+    }
+  }
 // to get real states or credential to update button disabled or not 
   useEffect(() => {
     if (credentials.name.length > 3 && credentials.phone.length > 9 && credentials.email.length > 3 && credentials.address.length > 3 && credentials.pincode.length ==6) {
@@ -55,63 +69,11 @@ export default function Checkout({ addToCart, cart,  removeFromCart, clearCart, 
       setState("")
       setCity("")
     }
-
+// getUser()
   }, [credentials,city,state])
-
-  // to get payment through paytm 
-  // const initiatePayment = async () => {
-
-  //   let oid = Math.floor(Math.random() * Date.now());
-  //   let dataa = { cart, subtotal, oid, email: credentials.email,name:credentials.name,address:credentials.address,pincode:credentials.pincode,phone:credentials.phone };
-  //   //get a transition token 
-  //   const data = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/paytm/pretransaction`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-type": "application/json"
-  //     },
-  //     body: JSON.stringify(dataa),
-  //   })
-  //   let txnRes = await data.json()
-  //   console.log(txnRes)
-  //   let txnToken = txnRes.txnToken
-  //   console.log(txnToken)
-  //   if (txnToken == undefined) {
-  //     setCaseondelivery(true)
-  //   }
-  //   //paytm process after getting txnToken 
-  //   let config: any = {
-  //     "root": "",
-  //     "flow": "DEFAULT",
-  //     "data": {
-  //       "orderId": oid, /* update order id */
-  //       "token": txnToken, /* update token value */
-  //       "tokenType": "TXN_TOKEN",
-  //       "amount": subtotal/* update amount */
-  //     },
-  //     "handler": {
-  //       "notifyMerchant": function (eventName: any, data: any) {
-  //         console.log("notifyMerchant handler function called");
-  //         console.log("eventName => ", eventName);
-  //         console.log("data => ", data);
-  //       }
-  //     }
-  //   };
-  //   // initialze configuration using init method
-
-
-
-
-
-
-  //   // window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-  //   //   // after successfully updating configuration, invoke JS Checkout
-  //   //   console.log('init')
-  //   //   window.Paytm.CheckoutJS.invoke();
-  //   // }).catch(function onError(error: any) {
-  //   //   console.log("error => ", error);
-  //   // });
-
-  // }
+useEffect(()=>{
+  getUser()
+},[])
 
   // to get order with case payment method
   const caseOnSubmit = async () => {

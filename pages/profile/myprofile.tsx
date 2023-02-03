@@ -56,7 +56,6 @@ export default function Myprofile() {
       }
     })
     const response = await data.json()
-    console.log(response)
     if (response.success) {
       setCredentials({ name: response.user.name, email: response.user.email, address: response.user.address, phone: response.user.phone, pincode: response.user.pincode })
     }
@@ -98,7 +97,6 @@ export default function Myprofile() {
       theme: "light",
       });
    }
-    console.log(response)
   }
 
 
