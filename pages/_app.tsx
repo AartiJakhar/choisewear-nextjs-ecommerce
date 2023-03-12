@@ -8,6 +8,7 @@ import Head from 'next/head'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoadingBar from 'react-top-loading-bar'
+import Header from '../components/header/Header'
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 const [cart, setCart] = useState({})
@@ -138,7 +139,8 @@ saveCart({})
         waitingTime={400}
         onLoaderFinished={() => setProgress(0)}
       />
-   <Navbar key={key} user={user} logOut={logOut} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />
+   {/* <Navbar key={key} user={user} logOut={logOut} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} /> */}
+   <Header/>
        <ToastContainer/>
    <Component buyNow={buyNow} subtotal={subtotal} addToCart={addToCart} cart={cart} setCart={setCart} removeFromCart={removeFromCart} saveCart={saveCart} clearCart={clearCart} {...pageProps} />
    <Footer/></>

@@ -1,0 +1,127 @@
+
+  .bgHeader{
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    will-change: transform,opacity,filter;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+  .home .banner{
+    color:#fff;
+    font-size: 5rem;
+    text-shadow: 0 .3rem .5rem rgba(0,0,0,.3);
+  }
+  
+  .home .slogan{
+    color:#eee;
+    font-size: 2.5rem;
+    font-weight: 400;
+  }
+  
+  .home button{
+    height: 4rem;
+    width: 18rem;
+    background:#fff;
+    color: #444;
+    cursor: pointer;
+    border:none;
+    outline: none;
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 400;
+    box-shadow: 0 .3rem .5rem rgba(0,0,0,.3);
+  }
+  
+  .home button:hover{
+    letter-spacing: .1rem;
+  }
+  
+  .home .wave{
+    position: absolute;
+    bottom: -.5rem;
+    left: 0;
+    height:11rem;
+    width: 100%;
+    background: url(/wave.png);
+    background-size: 100rem 11rem;
+    background-repeat: repeat-x;
+    animation:waves 10s linear infinite;
+  }
+  
+  .home .wave2{
+    animation-direction: reverse;
+    opacity: .2;
+  }
+  
+  .home .wave3{
+    animation-duration: 4s;
+    opacity: .5;
+  }
+  
+  @keyframes waves{
+    0%{
+      background-position-x: 0;
+    }
+    100%{
+      background-position-x: 100rem;
+    }
+  }
+  
+  .home .faCog{
+    position: absolute;
+    font-size: 30rem;
+    opacity: .15;
+    color:#fff;
+    animation: rotate 10s linear infinite;
+  }
+  
+  .home .nut1{
+    top:10%; left: -15rem;
+  }
+  
+  .home .nut2{
+    bottom:23%; right: -13rem;
+    animation-direction: reverse;
+  }
+  
+  @keyframes rotate{
+    100%{
+      transform: rotate(360deg);
+    }
+  }
+  
+  @media (max-width:768px){
+    
+    .home .banner{
+      font-size: 4rem;
+    }
+  
+    .home .slogan{
+      font-size: 1.7rem;
+    }
+  
+  }
+  .bgHeader{
+    background:url('/header_showcase.jpg');
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    will-change: transform,opacity,filter;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }

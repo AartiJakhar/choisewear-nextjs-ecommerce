@@ -1,7 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+:root{
+    --color:#9e00bb;
+    --border:.1rem solid rgba(0, 0, 0, 0.3);
+  }
 body{
     overflow-x: hidden;
 }

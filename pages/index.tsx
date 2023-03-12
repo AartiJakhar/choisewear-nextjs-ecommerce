@@ -11,7 +11,7 @@ export default function Home() {
        <meta  name="description" content="ChoiceWear.com - Wear the code"/>
        <link rel="icon" href="/fevicon.png"/>
     </Head>
-    <Banner/>
+    {/* <Banner/> */}
     <Content/>
 
   </>
