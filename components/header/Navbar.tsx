@@ -68,7 +68,7 @@ export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, 
           link:"/items/mugs",
   
         },
-        { id:"3",
+        { id:"4",
           name:"Stickers",
           link:"/items/stickers",
   
@@ -79,6 +79,7 @@ export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, 
        const toggleCart = () => {
         setSidebarToggler(!sidebarToggler)
       }
+      const [userdropdown, setUserdropdown] = useState(false)
   return <>
    <div className={`${styles.nav} ${dropdownToggled? styles.toggle:""} ${background || pathname!=='/'? styles.active :""} ` } >
     <div>
@@ -100,19 +101,44 @@ export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, 
             <button>logout</button>
             
           } */}
-  
-          <button className=" mx-3 inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none  rounded text-base mt-4 md:mt-0 hover:bg-gray-300 hover:text-black" onClick={toggleCart}>Cart<AiOutlineShoppingCart />
-</button>
+           
           </li>
 
         </ul>
       </nav>
+    </div>
+    <div className="flex flex-row">
+    <div className="absolute right-14 max-md:-top-[.8rem] max-lg:top-3" >
+          <button className=" mx-3 inline-flex items-center bg-transparent border-0 py-1 px-3 focus:outline-none  rounded text-base mt-4 md:mt-0 " onClick={toggleCart}>Cart<AiOutlineShoppingCart />
+</button>
+{user.value !== null && user.value != 'undefined' ? <button onMouseOver={() => { setUserdropdown(true) }} onMouseLeave={() => { setUserdropdown(false) }} className=" inline-flex items-center bg-transparent border-0 py-2 pr-8 focus:outline-none  rounded text-base mt-4 md:mt-0"> <FaUserAlt />
+          </button> :
+            <Link href={"/login"}>
+              <button className='inline-flex items-center bg-transparent border-0 py-2 pr-8 focus:outline-none  rounded text-base mt-4 md:mt-0'>Singin</button> </Link>}
+
     </div>
     <div className={`${styles.navburgur} dropbtn`}   onClick={navToggle}  >
       <div className={`dropbtn ${styles.line1}`} onClick={navToggle}></div>
       <div className={`dropbtn ${styles.line2}`} onClick={navToggle}></div>
       <div className={`dropbtn ${styles.line3}`} onClick={navToggle}></div>
     </div>
+    <div onMouseOver={() => { setUserdropdown(true) }} onMouseLeave={() => { setUserdropdown(false) }}>
+
+{user.value && userdropdown &&
+  <div className="absolute right-0 pt-4 max-md:top-10 md:top-12 ">
+    <div className={`rounded bg-[#9e00bb]  pr-20 pl-4 py-2 shadow-lg     cursor-pointer `}>
+      <ul>
+        <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'><Link href={"/orders/orders"}>Orders</Link> </li>
+        <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'><Link href={"/profile/myprofile"}>Profile</Link></li>
+        <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black' onClick={logOut}>Log out</li>
+      </ul>
+    </div> </div>}
+
+</div>
+    </div>
+    {/* //user  */}
+
+    {/* sidebarcart */}
     <div ref={ref} className={`sidecart h-[100vh]  overflow-auto absolute right-0 top-0 ${styles.sidebarcart} p-10 transition-transform ${sidebarToggler ? "translate-x-full" : "translate-x-0"}`}>
         <h2 className='font-bold text-xl  text-center'>Shoping Cart</h2>
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl  "><AiFillCloseCircle /></span>

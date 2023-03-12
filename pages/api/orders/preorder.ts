@@ -7,7 +7,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method == "POST") {
     //initializing  order
     const token:any = req.headers["auth-token"];
-    if(token!==undefined ){
+    console.log(token);
+    
+    if(token!=="null" ){
+      
       //check if card is tempered with - 
       let cart = req.body.cart
       let sumtotal=0
@@ -66,6 +69,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
     res.status(200).json({success:true,error:""} );
+    }else{
+      res.status(400).json({error:"please signin first to order"})
     }
   }
 };
