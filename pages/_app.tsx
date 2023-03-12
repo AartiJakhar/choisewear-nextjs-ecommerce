@@ -140,7 +140,7 @@ saveCart({})
         onLoaderFinished={() => setProgress(0)}
       />
    {/* <Navbar key={key} user={user} logOut={logOut} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} /> */}
-   <Header/>
+   <Header key={key} user={user} logOut={logOut} addToCart={addToCart} cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} subtotal={subtotal} />
        <ToastContainer/>
    <Component buyNow={buyNow} subtotal={subtotal} addToCart={addToCart} cart={cart} setCart={setCart} removeFromCart={removeFromCart} saveCart={saveCart} clearCart={clearCart} {...pageProps} />
    <Footer/></>

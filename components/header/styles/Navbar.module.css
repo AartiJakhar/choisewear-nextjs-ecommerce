@@ -135,4 +135,16 @@
   
    
   }
-  
+
+  /* cart// */
+
+
+  .sidebarcart{
+    background:linear-gradient(#0064a8, var(--color));
+  }
+
+  .bg{
+    background-color: #0064a8;
+    /* background:linear-gradient(#0064a8, var(--color)); */
+    cursor: pointer;
+  }
