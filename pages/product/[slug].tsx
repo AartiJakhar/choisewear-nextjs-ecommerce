@@ -62,7 +62,7 @@ if(error){
   return <Error statusCode={404} />
 }
   return (
-    <section className="text-gray-600 body-font overflow-hidden px-10">
+    <section className="text-gray-600 body-font overflow-hidden px-10 py-10">
       <ToastContainer />
       <div className="container  py-14 mx-auto">
         <div className="  mx-auto flex flex-wrap justify-center " >

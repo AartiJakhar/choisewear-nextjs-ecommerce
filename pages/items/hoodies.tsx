@@ -5,7 +5,7 @@ export default function Hoodies({data}:any) {
   const {categoryProducts}=data;
   
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 body-font h-screen py-14">
     <div className="container px-5 py-20 mx-auto">
       <div className="flex flex-wrap justify-around -m-4">
         {/* {hoodies.length === 0 && <h1>soory not available now </h1>} */}

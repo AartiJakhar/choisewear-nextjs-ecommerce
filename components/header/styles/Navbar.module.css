@@ -7,10 +7,9 @@
     z-index: 100;
     justify-content: space-between;
     padding:1.5rem 2rem;
-    color: white;
   }
    .active{
-    background:linear-gradient(#0064a8, var(--color));
+    background:linear-gradient(#ffffff, var(--color));
   }
   /* navlog0 css */
   .navlogo {
@@ -27,7 +26,6 @@
     list-style: none;
   }
   .navrow nav a , .navrow nav button {
-    color: #fff;
     text-decoration: none;
     padding: 0rem 1rem;
     font-size: 1.6rem;
@@ -47,7 +45,6 @@
   .navburgur div {
     width: 25px;
     height: 3px;
-    background-color: rgb(234, 232, 232);
     margin: 5px;
     transition: all 0.3s ease;
   }
@@ -100,7 +97,7 @@
       
     }
     .toggle{
-         background:linear-gradient(#0064a8, var(--color));
+         background:linear-gradient(#ffffff, var(--color));
     }
     .toggle .nav {
       display: flex;
@@ -140,11 +137,11 @@
 
 
   .sidebarcart{
-    background:linear-gradient(#0064a8, var(--color));
+    background:linear-gradient(#ffffff, var(--color));
   }
 
   .bg{
-    background-color: #0064a8;
+    background-color: #181818;
     /* background:linear-gradient(#0064a8, var(--color)); */
     cursor: pointer;
   }

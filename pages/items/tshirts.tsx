@@ -6,7 +6,7 @@ export default function tshirts({ data }: any) {
 
 
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 body-font  py-14 h-screen">
       <div className="container px-5 py-20 mx-auto">
         <div className="flex flex-wrap justify-around -m-4">
           {categoryProducts && Object.keys(categoryProducts).map((e: any) => {
@@ -24,6 +24,7 @@ export default function tshirts({ data }: any) {
                       return <span key={e} className=' border-solid border-2 border-slate-300 mx-1 px-2'>{e}</span>
                     })}
                   </div>
+                  <div className='bg-gray-500 bg-black bg-red-500 bg-pink-500 bg-white'></div>
                   <div className=' py-3 relative'>
                     {categoryProducts[e].color.map((element: string, i: number) => {
                       return <button key={element} className={`relative right-${i} border-2 border-gray-300 ml-1 bg-${element === "black" ? 'neutral' : element}-500 rounded-full w-6 h-6 focus:outline-none`} style={{ background: `${element === 'black' && "black" || element === 'green' && "green" || element === 'yellow' && "yellow" || element === 'red' && "red"}` }} ></button>

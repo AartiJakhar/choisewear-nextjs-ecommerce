@@ -110,7 +110,8 @@
   
   }
   .bgHeader{
-    background:url('/header_showcase.jpg');
+    background:url('/banner.png');
+    /* background:url('/header_showcase.jpg'); */
     position: absolute;
     width: 100%;
     min-height: 100%;
@@ -124,4 +125,11 @@
     backface-visibility: hidden;
     background-repeat: no-repeat;
     z-index: 0;
-  }
+ 
+}
+  
+@media screen and (max-width: 800px) {
+.bgHeader{
+  background-position: left !important;
+}
+}

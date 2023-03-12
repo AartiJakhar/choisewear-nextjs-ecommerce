@@ -9,20 +9,11 @@ import { FaUserAlt } from "react-icons/fa"
 export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, clearCart }: any) {
   const ref: any = useRef()
     const router = useRouter();
-    const {pathname}=router;
     
        const [dropdownToggled, setdropdownToggle] = useState(false);
-       const [background, setbackground] = useState(false)
-   
        
        
-       const changeBackground=()=>{
-        if(window.scrollY>=50){
-          setbackground(true)
-        }else{
-          setbackground(false)
-        }
-       }
+ 
       
        const navToggle=()=>{
          if(dropdownToggled){
@@ -31,12 +22,7 @@ export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, 
            setdropdownToggle(true)
          }
        }
-       
-   
-         if (typeof window !== "undefined") {
-           window.addEventListener('scroll',changeBackground)
-         
-       }
+ 
        const [sidebarToggler, setSidebarToggler] = useState(true)
        let dataList =[
         {  id:"1" ,
@@ -67,7 +53,7 @@ export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, 
       }
       const [userdropdown, setUserdropdown] = useState(false)
   return <>
-   <div className={`${styles.nav} ${dropdownToggled? styles.toggle:""} ${background || pathname!=='/'? styles.active :""} ` } >
+   <div className={`${styles.nav} ${dropdownToggled? styles.toggle:""} ${ styles.active } ` } >
     <div>
       <Link href="/"  >
       <Image src='/choisewearlogo.svg' width={350} height={50} className={styles.navlogo}  alt="icon"></Image>
@@ -103,16 +89,16 @@ export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, 
               <button className='inline-flex items-center bg-transparent border-0 py-2 pr-8 focus:outline-none  rounded text-base mt-4 md:mt-0'>Singin</button> </Link>}
 
     </div>
-    <div className={`${styles.navburgur} dropbtn`}   onClick={navToggle}  >
-      <div className={`dropbtn ${styles.line1}`} onClick={navToggle}></div>
-      <div className={`dropbtn ${styles.line2}`} onClick={navToggle}></div>
-      <div className={`dropbtn ${styles.line3}`} onClick={navToggle}></div>
+    <div className={`${styles.navburgur} dropbtn `}   onClick={navToggle}  >
+      <div className={`dropbtn ${styles.line1} bg-black`} onClick={navToggle}></div>
+      <div className={`dropbtn ${styles.line2} bg-black`} onClick={navToggle}></div>
+      <div className={`dropbtn ${styles.line3} bg-black`} onClick={navToggle}></div>
     </div>
     <div onMouseOver={() => { setUserdropdown(true) }} onMouseLeave={() => { setUserdropdown(false) }}>
 
 {user.value && userdropdown &&
-  <div className="absolute right-0 pt-4 max-md:top-10 md:top-12 ">
-    <div className={`rounded bg-[#9e00bb]  pr-20 pl-4 py-2 shadow-lg     cursor-pointer `}>
+  <div className="absolute right-0 pt-4 top-8 lg:top-12 ">
+    <div className={`text-black  rounded bg-[#fafafa]  pr-20 pl-4 py-2 shadow-lg     cursor-pointer `}>
       <ul>
         <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'><Link href={"/orders/orders"}>Orders</Link> </li>
         <li className='hover:border-solid hover:border-x-blue-100 py-2 hover:border-b active:text-black'><Link href={"/profile/myprofile"}>Profile</Link></li>
@@ -146,8 +132,8 @@ export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, 
           }
         </ol>
         <div className='flex align-middle justify-between mt-3  flex-wrap  '>
-          <Link href={"/checkout"}> <button disabled={Object.keys(cart).length == 0} className={`${styles.bg} flex my-3 text-white disabled:bg-blue-200  border-0 py-2 px-1 focus:outline-none  rounded text-sm`}> <BsFillBagCheckFill className='m-1' /> Check Out</button></Link>
-          <button disabled={Object.keys(cart).length == 0} className={`my-3 mx-2  text-white disabled:bg-blue-200 ${styles.bg} border-0 py-2 px-4 focus:outline-none rounded text-sm`} onClick={clearCart}>Clear Cart</button>
+          <Link href={"/checkout"}> <button disabled={Object.keys(cart).length == 0} className={`${styles.bg} flex my-3 text-white disabled:bg-gray-500  border-0 py-2 px-1 focus:outline-none  rounded text-sm`}> <BsFillBagCheckFill className='m-1' /> Check Out</button></Link>
+          <button disabled={Object.keys(cart).length == 0} className={`my-3 mx-2  text-white disabled:bg-gray-700 ${styles.bg} border-0 py-2 px-4 focus:outline-none rounded text-sm`} onClick={clearCart}>Clear Cart</button>
         </div>
 
       </div>

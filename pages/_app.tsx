@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import _Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import {useState,useEffect} from "react"
 import { useRouter } from 'next/router'
@@ -17,15 +16,7 @@ const [user, setUser] = useState<object>({value:null})
 const [subtotal, setSubtotal] = useState<any>(null)
 const [progress, setProgress] = useState(0)
   // Inject types that this component accepts
-const Navbar = _Navbar as unknown as React.JSXElementConstructor<{
-  addToCart: any,
-  cart:any,
-  removeFromCart:any,
-  clearCart:any,
-  subtotal:any,
-  user:object,
-  logOut:Function,
- }>
+
  useEffect(() => {
   
   router.events.on('routeChangeStart', (()=>{

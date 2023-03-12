@@ -30,7 +30,7 @@ export default function Orders({ nextauthUrl }: any) {
     }
   }, [router])
   return (
-    <div className="container mx-auto my-5 flex  flex-col ">
+    <div className="container mx-auto my-5 flex  flex-col py-20">
       <div>
         <h2 className='text-3xl text-center py-4'>My Orders</h2>
       </div>
