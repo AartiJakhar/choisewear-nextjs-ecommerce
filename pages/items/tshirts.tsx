@@ -6,7 +6,7 @@ export default function tshirts({ data }: any) {
 
 
   return (
-    <section className="text-gray-600 body-font  py-14 h-screen">
+    <section className="text-gray-600 body-font  py-14 ">
       <div className="container px-5 py-20 mx-auto">
         <div className="flex flex-wrap justify-around -m-4">
           {categoryProducts && Object.keys(categoryProducts).map((e: any) => {
