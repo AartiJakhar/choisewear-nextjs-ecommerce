@@ -106,7 +106,7 @@ export default function Myprofile() {
   }, [])
 
   return (
-    <div className='p-3 md:px-32 px-10 bg-gray-100'>
+    <div className='p-3 md:p-32 px-10 bg-gray-100  max-lg:py-20'>
 
       <h1 className='font-bold text-3xl my-8 text-center'>Profile</h1>
       <div className='my-10 shadow-lg bg-white py-10  rounded-lg flex md:flex-row flex-col flex-wrap'>
