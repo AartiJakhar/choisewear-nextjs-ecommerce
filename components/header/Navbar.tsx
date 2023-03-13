@@ -81,12 +81,12 @@ export default function Navbar({ logOut, user, addToCart, cart, removeFromCart, 
     </div>
     <div className="flex flex-row">
     <div className="absolute right-14 max-md:-top-[.8rem] max-lg:top-3" >
-          <button className=" mx-3 inline-flex items-center bg-transparent border-0 py-1 px-3 focus:outline-none  rounded text-base mt-4 md:mt-0 " onClick={toggleCart}>Cart<AiOutlineShoppingCart />
+          <button className=" mx-3 inline-flex items-center bg-transparent border-0 py-1 px-3 max-sm:px-0 focus:outline-none  rounded text-base mt-4 md:mt-0 " onClick={toggleCart}><span className={styles.cart}>Cart </span><AiOutlineShoppingCart />
 </button>
 {user.value !== null && user.value != 'undefined' ? <button onMouseOver={() => { setUserdropdown(true) }} onMouseLeave={() => { setUserdropdown(false) }} className=" inline-flex items-center bg-transparent border-0 py-2 pr-8 focus:outline-none  rounded text-base mt-4 md:mt-0"> <FaUserAlt />
           </button> :
             <Link href={"/login"}>
-              <button className='inline-flex items-center bg-transparent border-0 py-2 pr-8 focus:outline-none  rounded text-base mt-4 md:mt-0'>Singin</button> </Link>}
+              <button className={`inline-flex items-center ${styles.user}  bg-transparent border-0 py-2 pr-8 focus:outline-none  rounded text-base mt-4 md:mt-0`}>Singin</button> </Link>}
 
     </div>
     <div className={`${styles.navburgur} dropbtn `}   onClick={navToggle}  >

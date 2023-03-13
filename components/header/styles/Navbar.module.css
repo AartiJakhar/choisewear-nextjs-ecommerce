@@ -145,3 +145,29 @@
     /* background:linear-gradient(#0064a8, var(--color)); */
     cursor: pointer;
   }
+
+
+/* //to mobail screen */
+  @media screen and (max-width: 400px) {
+    .navlogo {
+      position: absolute;
+      top: -38px;
+      width:160px !important ;
+      height:150px !important ;
+      left: -.5rem;
+      }
+      .navburgur{
+        right: -1.5rem;
+      }
+  .user{
+    padding:0rem 0rem ;
+  }
+   
+  }
+  @media screen and (max-width: 300px) {
+
+   .cart{
+    display: none;
+
+   }
+  }
