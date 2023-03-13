@@ -6,7 +6,7 @@
     right: 0;
     z-index: 100;
     justify-content: space-between;
-    padding:1.5rem 2rem;
+    padding:1rem 2rem;
   }
    .active{
     background:linear-gradient(#ffffff, var(--color));
@@ -14,7 +14,7 @@
   /* navlog0 css */
   .navlogo {
     position: absolute;
-    top: -55px;
+    top: -65px;
     width:250px !important ;
     height:250px !important ;
     }
