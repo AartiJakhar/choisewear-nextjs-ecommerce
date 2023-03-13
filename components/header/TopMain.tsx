@@ -7,7 +7,7 @@ export default function TopMain() {
 
 </div>
 <div className='left-0 right-0 py-64 absolute flex flex-col items-center sm:px-20  px-10 justify-center text-center'>
-<h1 className={styles.banner}>
+<h1 className={`${styles.banner}`}>
           Welcome to <span className=''>CHOISEWEAR</span>
         </h1>
         <div className={styles.slogan}>

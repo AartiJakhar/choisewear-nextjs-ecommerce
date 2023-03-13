@@ -129,6 +129,17 @@
 }
   
 @media screen and (max-width: 800px) {
+  .home .banner{
+    color:#fff;
+    font-size: 2rem;
+    text-shadow: 0 .3rem .5rem rgba(0,0,0,.3);
+  }
+  
+  .home .slogan{
+    color:#eee;
+    font-size: 1rem;
+    font-weight: 400;
+  }
 .bgHeader{
   background-position: left !important;
   top: 60px !important;
